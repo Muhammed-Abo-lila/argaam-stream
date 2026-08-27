@@ -4,8 +4,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 // Set language direction on language change
 i18n.on("languageChanged", (locale) => {
-  const direction = i18n.dir(locale);
-  document.body.dir = direction;
+  document.documentElement.dir = i18n.dir(locale);
   document.documentElement.lang = locale;
 });
 i18n
