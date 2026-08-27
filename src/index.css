@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --identity_color: #b15903;
+  --bg_main: #ffffff;
+  --bg_secondary: #faf6f3;
+  --text_main: #262220;
+  --text_secondary: #595350;
+}
+
+[data-bs-theme="dark"] {
+  --identity_color: #fe9141;
+  --bg_main: #161311;
+  --bg_secondary: #1e1b19;
+  --text_main: #f6f3ec;
+  --text_secondary: #b6afab;
+}
+
+[lang="en"] body {
+  font-family: "Google Sans Flex", sans-serif;
+}
+
+[lang="ar"] body {
+  font-family: "IBM Plex Sans Arabic", sans-serif;
+}
+
+body {
+  background-color: var(--bg_main);
+  margin: 0;
+}
+.theme_bg_identity {
+  background-color: var(--identity_color);
+}
+.theme_text_identity {
+  color: var(--identity_color);
+}
+.theme_bg_main {
+  background-color: var(--bg_main);
+}
+.theme_bg_secondary {
+  background-color: var(--bg_secondary);
+}
+.theme_text_main {
+  color: var(--text_main);
+}
+.theme_text_secondary {
+  color: var(--text_secondary);
+}

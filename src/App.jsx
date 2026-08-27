@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import useLang from "./utils/useLang";
+import { useTheme } from "./context/ThemeContext";
 
 function App() {
   const { i18n } = useTranslation();
@@ -7,17 +8,19 @@ function App() {
     i18n.changeLanguage(language);
   };
   const lang = useLang("en", "ar");
+  const { theme, toggleTheme } = useTheme();
   return (
-    <div className="container">
-      <h1 className="theme_text_color">{lang === "en" ? "hello" : "مرحبا"}</h1>
-      <button className="btn btn-info" onClick={() => changeLanguage("en")}>
-        {lang === "en" ? "en" : "الانجليزيه"}
+    <div className="container mt-5">
+      <h1 className="theme_text_identity" style={{fontSize:"14px"}}>{lang === "en" ? "Home" : "الرئيسيه"}</h1>
+      
+      <button className="btn btn-info" onClick={() => changeLanguage(lang==="en"?"ar":"en")}>
+        {lang === "en" ? "lang" : "اللغه"}
       </button>
-      <button className="btn btn-primary" onClick={() => changeLanguage("ar")}>
-        {lang === "en" ? "ar" : "العربيه"}
+
+      <button className="btn btn-info" onClick={toggleTheme}>
+        {theme === "dark" ? "dark" : "light"}
       </button>
     </div>
   )
 }
-
 export default App
