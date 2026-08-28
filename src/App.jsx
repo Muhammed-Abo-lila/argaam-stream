@@ -1,30 +1,69 @@
-import { useTranslation } from "react-i18next";
+import { lazy, Suspense } from "react";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 import useLang from "./utils/useLang";
-import { useTheme } from "./context/ThemeContext";
+import Layout from "./Layout";
+
+const Home = lazy(() => import("./pages/Home/Home"));
+const Channels = lazy(() => import("./pages/Channels/Channels"));
+const BrowseAll = lazy(() => import("./pages/BrowseAll/BrowseAll"));
+const MyList = lazy(() => import("./pages/MyList/MyList"));
+const Search = lazy(() => import("./pages/Search/Search"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 function App() {
-  const { i18n } = useTranslation();
-  const changeLanguage = (language) => {
-    i18n.changeLanguage(language);
-  };
   const lang = useLang("en", "ar");
-  const { theme, toggleTheme } = useTheme();
+  const LangRedirectWrapper = () => {
+    const location = useLocation();
+    const pathParts = location.pathname.split("/");
+    if (pathParts[1] !== lang) {
+      pathParts[1] = lang;
+      return <Navigate to={pathParts.join("/")} replace />;
+    }
+    return <NotFound />;
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: lang,
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "channels",
+          element: <Channels />,
+        },
+        {
+          path: "browse",
+          element: <BrowseAll />,
+        },
+        {
+          path: "myList",
+          element: <MyList />,
+        },
+        {
+          path: "search",
+          element: <Search />,
+        },
+      ],
+    },
+    {
+      path: "*",
+      element: <LangRedirectWrapper />,
+    },
+  ]);
+
   return (
-    <div className="container mt-5">
-      <h1 className="theme_text_identity" style={{ fontSize: "14px" }}>{lang === "en" ? "Home" : "الرئيسيه"}</h1>
-
-      <button className="btn btn-info" onClick={() => changeLanguage(lang === "en" ? "ar" : "en")}>
-        {lang === "en" ? "lang" : "اللغه"}
-      </button>
-
-      <button className="btn btn-info" onClick={toggleTheme}>
-        {theme === "dark" ? "dark" : "light"}
-      </button>
-      <div className="row">
-        <div className="col-6 theme_bg_main">Muhammad</div>
-        <div className="col-6 theme_bg_secondary">Abo lila</div>
-      </div>
-    </div>
-  )
+    <Suspense fallback={null}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }
-export default App
+export default App;
