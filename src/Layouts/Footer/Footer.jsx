@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import useLang from "../utils/useLang"
-import logoImg from "../assets/brand/argaam-logo-footer-white.png"
+import useLang from "../../utils/useLang"
+import logoImg from "../../assets/brand/argaam-logo-footer-white.png"
 const Footer = () => {
     return (
         <footer className="container-fluid custom-fs-14" style={{ backgroundColor: "#000" }}>
