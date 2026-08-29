@@ -15,7 +15,7 @@
 }
 @media (min-width: 720px) {
   :root {
-    --fs-24-30: 1.875rem;
+    --fs-24-30: 1.875rem; 
   }
 }
 [data-bs-theme="dark"] {
@@ -82,4 +82,7 @@ body {
 }
 .custom-fs-12 {
   font-size: var(--fs-12) !important;
+}
+.cursor-pointer{
+  cursor: pointer;
 }

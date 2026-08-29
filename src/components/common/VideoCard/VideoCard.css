@@ -1,0 +1,32 @@
+.video-card .layer {
+  background-color: #1e1b194d;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+.video-card .video-cover .video-play-icon {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+.video-card:hover .layer,
+.video-card:hover .video-cover .video-play-icon {
+  opacity: 1;
+  visibility: visible;
+}
+.video-card .channel-title {
+  position: relative;
+}
+
+.video-card .channel-title::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 12px;
+  margin-inline-end: 6px;
+  background-color: red;
+}
