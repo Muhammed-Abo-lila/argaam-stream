@@ -6,6 +6,11 @@
   --bg_secondary: #faf6f3;
   --text_main: #262220;
   --text_secondary: #595350;
+  --fs-24: 1.5rem;
+  --fs-18: 1.125rem;
+  --fs-16: 1rem;
+  --fs-14: 0.875rem;
+  --fs-12: 0.75rem;
 }
 
 [data-bs-theme="dark"] {
@@ -28,6 +33,8 @@ body {
   background-color: var(--bg_main);
   margin: 0;
 }
+
+/* custom classes */
 .theme_bg_identity {
   background-color: var(--identity_color);
 }
@@ -45,4 +52,26 @@ body {
 }
 .theme_text_secondary {
   color: var(--text_secondary);
+}
+.footer_main_color {
+  color: #f6f3ec;
+}
+.footer_secondary_color {
+  color: #f6f3ecb8;
+}
+/* font sizes  */
+.custom-fs-24 {
+  font-size: var(--fs-24) !important;
+}
+.custom-fs-18 {
+  font-size: var(--fs-18) !important;
+}
+.custom-fs-16 {
+  font-size: var(--fs-16) !important;
+}
+.custom-fs-14 {
+  font-size: var(--fs-14) !important;
+}
+.custom-fs-12 {
+  font-size: var(--fs-12) !important;
 }
