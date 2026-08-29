@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useNavigate } from "react-router-dom";
 import useLang from "./utils/useLang";
-import Footer from "./Layouts/Footer/Footer";
+import Footer from "./layouts/Footer/Footer";
 import { useTheme } from "./context/ThemeContext";
 
 const Layout = () => {
