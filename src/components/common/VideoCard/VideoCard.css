@@ -1,32 +1,27 @@
-.video-card .layer {
-  background-color: #1e1b194d;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
-}
 .video-card .video-cover .video-play-icon {
   opacity: 0;
   visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
-.video-card:hover .layer,
 .video-card:hover .video-cover .video-play-icon {
   opacity: 1;
   visibility: visible;
+  background-color: rgb(from var(--bg_secondary) r g b / 60%);
 }
 .video-card .channel-title {
   position: relative;
 }
-
 .video-card .channel-title::before {
   content: "";
-  display: inline-block;
+  position: absolute;
+  top: 2px;
+  bottom: 3px;
   width: 3px;
-  height: 12px;
-  margin-inline-end: 6px;
-  background-color: red;
+  background-color: var(--channel_color);
+}
+[dir="rtl"] .video-card .channel-title::before {
+  right: -7px;
+}
+[dir="ltr"] .video-card .channel-title::before {
+  left: -7px;
 }

@@ -6,6 +6,13 @@
   --bg_secondary: #faf6f3;
   --text_main: #262220;
   --text_secondary: #595350;
+  --data_color_orange: #c67e4e;
+  --data_color_blue: #316ca5;
+  --data_color_gold: #c4a953;
+  --data_color_magenta: #ac5d7e;
+  --data_color_cyan: #09a0a0;
+  --data_color_violet: #825b9e;
+  --data_color_neutral: #938d89;
   --fs-24-30: 1.5rem;
   --fs-24: 1.5rem;
   --fs-18: 1.125rem;
@@ -15,7 +22,7 @@
 }
 @media (min-width: 720px) {
   :root {
-    --fs-24-30: 1.875rem; 
+    --fs-24-30: 1.875rem;
   }
 }
 [data-bs-theme="dark"] {
@@ -24,6 +31,34 @@
   --bg_secondary: #1e1b19;
   --text_main: #f6f3ec;
   --text_secondary: #b6afab;
+  --data_color_orange: #c07848;
+  --data_color_blue: #3d78b2;
+  --data_color_gold: #aa9039;
+  --data_color_magenta: #a35475;
+  --data_color_cyan: #019696;
+  --data_color_violet: #8b64a8;
+  --data_color_neutral: #79736f;
+}
+[data-color="orange"] {
+  --channel_color: var(--data_color_orange);
+}
+[data-color="blue"] {
+  --channel_color: var(--data_color_blue);
+}
+[data-color="gold"] {
+  --channel_color: var(--data_color_gold);
+}
+[data-color="magenta"] {
+  --channel_color: var(--data_color_magenta);
+}
+[data-color="cyan"] {
+  --channel_color: var(--data_color_cyan);
+}
+[data-color="violet"] {
+  --channel_color: var(--data_color_violet);
+}
+[data-color="neutral"] {
+  --channel_color: var(--data_color_neutral);
 }
 
 [lang="en"] body {
@@ -38,7 +73,9 @@ body {
   background-color: var(--bg_main);
   margin: 0;
 }
-
+.container-fluid {
+  max-width: 1600px !important;
+}
 /* custom classes */
 .theme_bg_identity {
   background-color: var(--identity_color);
@@ -83,6 +120,57 @@ body {
 .custom-fs-12 {
   font-size: var(--fs-12) !important;
 }
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
+}
+/* video and channel card style */
+.video-channel-card {
+  border: 1px solid var(--bg_secondary);
+  background-color: rgb(from var(--bg_main) r g b);
+  transition: background 0.3s ease-in-out;
+}
+.video-channel-card:hover {
+  background-color: rgb(from var(--bg_secondary) r g b / 60%);
+}
+/* browse all page */
+.browse-all .playlists-filter .playlists .active-playlist {
+  border: 1px solid var(--identity_color) !important;
+  color: var(--identity_color);
+  background-color: rgb(from var(--identity_color) r g b / 15%);
+}
+
+/* swiper style */
+.swiper .swiper-button-prev,
+.swiper .swiper-button-next {
+  opacity: 0 !important;
+  background: var(--bg_secondary);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.swiper:hover .swiper-button-prev,
+.swiper:hover .swiper-button-next {
+  opacity: 1 !important;
+}
+
+.swiper .swiper-button-prev svg,
+.swiper .swiper-button-next svg {
+  width: 17px !important;
+  height: 17px !important;
+  color: var(--text_secondary) !important;
+}
+.swiper .swiper-button-prev:hover,
+.swiper .swiper-button-next:hover {
+  transform: scale(1.05);
+}
+
+.swiper .swiper-button-disabled {
+  display: none !important;
+}
+.swiper .swiper-slide {
+  height: auto;
+}
+
+.swiper .swiper-slide > a {
+  height: 100%;
 }

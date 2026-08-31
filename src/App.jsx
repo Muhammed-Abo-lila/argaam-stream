@@ -8,16 +8,16 @@ import {
 import Layout from "./Layout";
 import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
+import Watch from "./pages/Watch/[videoId]";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const Channels = lazy(() => import("./pages/Channels/Channels"));
+const Channel = lazy(() => import("./pages/Channel/[slug]"));
 const BrowseAll = lazy(() => import("./pages/BrowseAll/BrowseAll"));
 const MyList = lazy(() => import("./pages/MyList/MyList"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
-
 function App() {
-
   const supportedLanguages = i18n.options.supportedLngs;
   const LanguageLayout = () => {
     const { lang } = useParams();
@@ -27,7 +27,6 @@ function App() {
     }
     return <Layout />;
   };
-
 
   const router = createBrowserRouter([
     {
@@ -43,20 +42,28 @@ function App() {
           element: <Channels />,
         },
         {
+          path: "channel/:slug",
+          element: <Channel />,
+        },
+        {
           path: "browse",
           element: <BrowseAll />,
         },
         {
-          path: "myList",
+          path: "my-list",
           element: <MyList />,
         },
         {
           path: "search",
           element: <Search />,
         },
+        {
+          path: "watch/:id",
+          element: <Watch />,
+        },
       ],
     },
-        {
+    {
       path: "*",
       element: <NotFound />,
     },
