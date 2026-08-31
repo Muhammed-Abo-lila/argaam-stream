@@ -4,13 +4,30 @@ import HomeSliderComp from "../../components/ui/HomeSliderComp/HomeSliderComp";
 import ChannelCard from "../../components/common/ChannelCard/ChannelCard";
 import { channels } from "../../data/channelsData";
 import { getEpisodesByChannelId, getEpisodesSortedByViews, getLatestEpisodes } from "../../data/selectorFunctions";
+import HeroSection from "../../layouts/HeroSection/HeroSection";
 const Home = () => {
   const episodesSortedByViews = getEpisodesSortedByViews();
   const latestEpisodes = getLatestEpisodes();
   return (
-    <div className="container-fluid px-5 pb-5 mb-5">
+    <>
+      <HeroSection />
+      <div className="container-fluid pb-5 mb-5">
+        <div className="d-flex flex-column gap-5">
+          <HomeSliderComp
+            sectionTitle={useLang("argaam originals", "إنتاجات أرقام الأصلية")}
+            linkLabel={useLang("browse all", "تصفح الكل")}
+            link={`/${useLang("en", "ar")}/channels`}
+            data={channels}
+            renderItem={(channel) => <ChannelCard channel={channel} />}
+          />
 
-      <div className="d-flex flex-column gap-5">
+          <HomeSliderComp
+            sectionTitle={useLang("most watched", "الأكثر مشاهدة")}
+            linkLabel={useLang("more", "المزيد")}
+            link={`/${useLang("en", "ar")}/browse`}
+            data={episodesSortedByViews?.slice(0, 12)}
+            renderItem={(video) => <VideoCard videoData={video} />}
+          />
 
         <HomeSliderComp
           sectionTitle={useLang("argaam originals", "إنتاجات أرقام الأصلية")}
@@ -62,10 +79,9 @@ const Home = () => {
           );
         })}
 
-
       </div>
-
-    </div>
+      </div>
+    </>
   );
 };
 
