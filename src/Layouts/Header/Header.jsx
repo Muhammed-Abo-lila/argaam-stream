@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import useLang from "../../utils/useLang";
 import { useTranslation } from "react-i18next";
+
+import { channels } from "../../data/channelsData";
+import { episodesData } from "../../data/episodesData";
 
 // logos
 import dark_logo from "../../assets/brand/argaam-logo-dark.png";
@@ -14,7 +17,7 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (value) => {
-    if (value !== "" || value !== null) {
+    if (value !== "" || value !== undefined) {
       setSearchTerm(value);
     }
   };
@@ -52,6 +55,37 @@ const Header = () => {
       path: "my-list",
     },
   ];
+
+  // search results data using useMemo to prevent filtering in every render
+  const searchResults = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase();
+
+    if (!query) {
+      return {
+        channels: [],
+        episodes: [],
+      };
+    }
+
+    const filteredChannels = channels.filter((channel) => {
+      return (
+        channel.name.ar.toLowerCase().includes(query) ||
+        channel.name.en.toLowerCase().includes(query)
+      );
+    });
+
+    const filteredEpisodes = episodesData.filter((episode) => {
+      return (
+        episode.title.ar.toLowerCase().includes(query) ||
+        episode.title.en.toLowerCase().includes(query)
+      );
+    });
+
+    return {
+      channels: filteredChannels,
+      episodes: filteredEpisodes,
+    };
+  }, [searchTerm]);
 
   return (
     <header className="navbar py-3">
@@ -115,29 +149,72 @@ const Header = () => {
                   onChange={(e) => handleSearch(e.target.value)}
                 />
                 {/* search dropdown */}
-                {searchTerm && (
+                {searchTerm.trim() && (
                   <div className="search-dropdown">
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Excepturi fugiat fugit labore quisquam numquam, quibusdam
-                      dolor voluptatibus nam ea sapiente quidem blanditiis nihil
-                      eligendi voluptas?
-                    </p>
-                    <div className="search-dropdown-actions">
-                      <Link
-                        to={`/${lang}/search`}
-                        onClick={() => setSearchTerm("")}
-                      >
-                        View all
-                      </Link>
-                    </div>
+                    {searchResults.channels.length === 0 &&
+                      searchResults.episodes.length === 0 && (
+                        <div className="not-found-data">
+                          <p className="">
+                            {lang === "en"
+                              ? "No Results Found"
+                              : "لا توجد نتائج"}
+                          </p>
+                        </div>
+                      )}
+
+                    {searchResults.channels.length > 0 &&
+                      searchResults.channels.slice(0, 3).map((channel) => (
+                        <Link
+                          to={`/${lang}/channel/${channel.id}`}
+                          onClick={() => setSearchTerm("")}
+                          className="result-card"
+                          key={channel.id}
+                        >
+                          <img src={channel.cover} alt={channel.name[lang]} />
+                          <div className="d-flex flex-column justify-content-between">
+                            <h3>{channel.name[lang].slice(0, 25)}</h3>
+                            <p>{channel.description[lang].slice(0, 25)}</p>
+                          </div>
+                        </Link>
+                      ))}
+
+                    {searchResults.episodes.length > 0 &&
+                      searchResults.episodes.slice(0, 3).map((episode) => (
+                        <Link
+                          to={`/${lang}/watch/${episode.id}`}
+                          onClick={() => setSearchTerm("")}
+                          className="result-card"
+                          key={episode.id}
+                        >
+                          <img
+                            src={`https://i.ytimg.com/vi/${episode?.youtubeId}/maxresdefault.jpg`}
+                            alt={episode.title[lang]}
+                          />
+                          <div className="d-flex flex-column justify-content-between">
+                            <h3>{episode.title[lang].slice(0, 25)}</h3>
+                            <p>{episode.synopsis[lang].slice(0, 25)}</p>
+                          </div>
+                        </Link>
+                      ))}
+
+                    {(searchResults.channels.length > 0 ||
+                      searchResults.episodes.length > 0) && (
+                      <div className="search-dropdown-actions">
+                        <Link
+                          to={`/${lang}/search?q=${encodeURIComponent(searchTerm.trim())}`}
+                          onClick={() => setSearchTerm("")}
+                        >
+                          {lang === "en" ? "View all" : "عرض الكل"}
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
               {/* icons */}
               <div
                 className="icon"
-                onClick={() => changeLanguage(lang === "en" ? "ar" : "en")}
+                onClick={() => changeLanguage(useLang("ar", "en"))}
               >
                 <span>{useLang("ع", "EN")}</span>
               </div>

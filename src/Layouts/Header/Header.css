@@ -93,7 +93,7 @@
 .navbar .search-dropdown {
     position: absolute;
     width: 100%;
-    height: 250px;
+    height: auto;
     background-color: var(--bg_main);
     border-radius: 10px;
     left: 0;
@@ -102,7 +102,6 @@
     border: 1px solid var(--bg_secondary);
     box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-    padding: 10px;
 }
 
 .navbar .search-dropdown .search-dropdown-actions {
@@ -113,14 +112,16 @@
 
 .navbar .search-dropdown .search-dropdown-actions a {
     width: 100px;
-    background-color: var(--identity_color);
+    /* background-color: var(--identity_color); */
     text-align: center;
     text-decoration: none;
-    color: var(--text_main);
+    color: var(--identity_color);
     padding-block: 5px;
     border-radius: 7px;
     font-size: var(--fs-16);
-
+    font-weight: bold;
+    text-decoration: underline;
+    text-transform: capitalize;
 }
 
 .navbar .search .search-icon {
@@ -167,4 +168,54 @@
     border: 1px solid var(--text_secondary) !important;
     transition: all ease-in-out 0.3s;
     background-color: var(--bg_secondary);
+}
+
+/* search dropdown result */
+.result-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-block-end: 10px;
+    cursor: pointer;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.result-card:hover {
+    background-color: var(--bg_secondary);
+}
+
+.result-card img {
+    width: 60px;
+    height: 50px;
+    object-fit: cover;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.result-card h3 {
+    margin-block-end: 5px;
+    font-size: var(--fs-14);
+    color: var(--text_main);
+}
+
+.result-card p {
+    margin: 0;
+    font-size: var(--fs-12);
+    color: var(--text_secondary);
+}
+
+/* no results */
+.not-found-data {
+    padding: 10px;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.not-found-data p {
+    font-size: var(--fs-16);
+    font-weight: bold;
+    color: var(--identity_color);
 }
