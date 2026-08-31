@@ -2,7 +2,10 @@ import "./VideoCard.css"
 import useLang from '../../../utils/useLang'
 import { Link } from "react-router-dom";
 import { getChannelByChannelId } from "../../../data/selectorFunctions";
+import { useState } from "react";
 const VideoCard = ({ videoData }) => {
+  const [imageQuality, setImageQuality] = useState("maxresdefault");
+  // get channel data depend on channelId to set color and channel name
   const channel = getChannelByChannelId(videoData?.channelId);
   return (
     <Link to={`/${useLang("en", "ar")}/watch/${videoData?.id}`} className="text-decoration-none h-100 d-block" data-color={channel?.key}>
@@ -14,7 +17,24 @@ const VideoCard = ({ videoData }) => {
               <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2Z"></path></svg>
             </div>
           </div>
-          <img className="card-img-top rounded-0" src={`https://i.ytimg.com/vi/${videoData?.youtubeId}/maxresdefault.jpg`} alt="Card image cap" />
+          <img
+            className="card-img-top rounded-0"
+            src={`https://i.ytimg.com/vi/${videoData?.youtubeId}/${imageQuality}.jpg`}
+            alt=""
+            onLoad={(e) => {
+              if (
+                imageQuality === "maxresdefault" &&
+                e.currentTarget.naturalWidth <= 120
+              ) {
+                setImageQuality("mqdefault");
+              }
+            }}
+            onError={() => {
+              if (imageQuality === "maxresdefault") {
+                setImageQuality("mqdefault");
+              }
+            }}
+          />
         </div>
         {/* video card content */}
         <div className="card-body d-flex flex-column gap-2">

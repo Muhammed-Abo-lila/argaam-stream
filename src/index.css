@@ -127,7 +127,6 @@ body {
 .video-channel-card {
   border: 1px solid var(--bg_secondary);
   background-color: rgb(from var(--bg_main) r g b);
-  transition: background 0.3s ease-in-out;
 }
 .video-channel-card:hover {
   background-color: rgb(from var(--bg_secondary) r g b / 60%);

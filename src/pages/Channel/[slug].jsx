@@ -4,12 +4,11 @@ import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
 import SortComp from "../../components/ui/SortComp/SortComp";
 import useLang from "../../utils/useLang";
 import { useState } from "react";
-
+import { getEpisodesByChannelId } from "../../data/selectorFunctions";
 const channel = () => {
     const { slug } = useParams();
-    console.log("slug===>", slug);
-
     const [activeSort, setActiveSort] = useState("newest")
+    const episodesByChannel = getEpisodesByChannelId(slug)
     const sortList = [
         {
             key: "newest",
@@ -24,25 +23,40 @@ const channel = () => {
             label: useLang("most watched", "الأكثر مشاهدة"),
         },
     ];
-    const episodesData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const sortedEpisodes = [...episodesByChannel].sort((a, b) => {
+        switch (activeSort) {
+            case "newest":
+                return b.number - a.number;
+
+            case "oldest":
+                return a.number - b.number;
+
+            case "mostWatched":
+                return b.views - a.views;
+
+            default:
+                return 0;
+        }
+    });
+
     return (
         <div className="container-fluid px-5 mb-5">
             {/*section header */}
             <div className="d-flex justify-content-between align-items-center flex-wrap row-gap-2">
-                {/* playlists filter */}
+                {/* playlists Title */}
                 <h4 className="custom-fs-16 text-capitalize theme_text_secondary">{useLang("all episodes", "كل الحلقات")}</h4>
                 {/* videos sort */}
                 <SortComp sortList={sortList} activeSort={activeSort} setActiveSort={setActiveSort} />
             </div>
-            {/* section videos */}
+            {/* section episode */}
             <div className="row mx-0">
-                {episodesData?.length > 0 ? (
-                    episodesData.map((item, idx) => (
+                {sortedEpisodes?.length > 0 ? (
+                    sortedEpisodes.map((episode, idx) => (
                         <div
                             key={idx}
                             className="col-12 col-sm-6 col-lg-4 col-xl-3 p-0"
                         >
-                            <VideoCard />
+                            <VideoCard videoData={episode} />
                         </div>
                     ))
                 ) : (
@@ -51,14 +65,14 @@ const channel = () => {
                         titleAr="لا توجد حلقات مُدرجة"
                         subTitleEn="this show has launched, but no episodes are published on argaam’s youTube channel yet, so there is nothing to play here."
                         subTitleAr="انطلق هذا البرنامج، لكن لا توجد له حلقات منشورة على قناة أرقام في يوتيوب حتى الآن، فلا يمكن تشغيله هنا."
-                        btnLabelEn="all"
-                        btnLabelAr="الكل"
-                        btnFnc={() => setActivePlayList("all")}
+                        isLink={true}
+                        linkLabelEn="browse all"
+                        linkLabelAr="تصفح الكل"
+                        link="browse"
                     />
                 )}
             </div>
         </div>
     )
 }
-
 export default channel

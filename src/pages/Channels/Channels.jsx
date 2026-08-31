@@ -1,8 +1,8 @@
 import useLang from "../../utils/useLang";
 import ChannelCard from "../../components/common/ChannelCard/ChannelCard";
 import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
+import { channels } from "../../data/channelsData";
 const Channels = () => {
-  const channelsData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   return (
     <div className="container-fluid px-5 mb-5 channels">
       <div className="mb-3 text-capitalize">
@@ -14,15 +14,14 @@ const Channels = () => {
           )}
         </p>
       </div>
-
       <div className="row mx-0">
-        {channelsData && channelsData?.length > 0 ? (
-          channelsData.map((item, idx) => (
+        {channels && channels?.length > 0 ? (
+          channels.map((channel, idx) => (
             <div
               key={idx}
               className="col-12 col-sm-6 col-lg-4 col-xl-3 p-0"
             >
-              <ChannelCard />
+              <ChannelCard channel={channel} />
             </div>
           ))
         ) : (
@@ -34,11 +33,7 @@ const Channels = () => {
           />
         )}
       </div>
-
-
-
     </div>
   )
 };
-
 export default Channels;
