@@ -3,25 +3,23 @@ import useLang from "../../utils/useLang";
 import HomeSliderComp from "../../components/ui/HomeSliderComp/HomeSliderComp";
 import ChannelCard from "../../components/common/ChannelCard/ChannelCard";
 import { channels } from "../../data/channelsData";
-import { getEpisodesSortedByViews, getLatestEpisodes } from "../../data/selectorFunctions";
+import {
+  getEpisodesSortedByViews,
+  getLatestEpisodes,
+} from "../../data/selectorFunctions";
 const Home = () => {
   const episodesSortedByViews = getEpisodesSortedByViews();
   const latestEpisodes = getLatestEpisodes();
-  console.log("latestEpisodes===>", latestEpisodes);
 
   return (
-    <div className="container-fluid px-5 pb-5 mb-5">
-
+    <div className="container-fluid pb-5 mb-5">
       <div className="d-flex flex-column gap-5">
-
         <HomeSliderComp
           sectionTitle={useLang("argaam originals", "إنتاجات أرقام الأصلية")}
           linkLabel={useLang("browse all", "تصفح الكل")}
           link={`/${useLang("en", "ar")}/channels`}
           data={channels}
-          renderItem={(channel) => (
-            <ChannelCard channel={channel} />
-          )}
+          renderItem={(channel) => <ChannelCard channel={channel} />}
         />
 
         <HomeSliderComp
@@ -29,9 +27,7 @@ const Home = () => {
           linkLabel={useLang("more", "المزيد")}
           link={`/${useLang("en", "ar")}/browse`}
           data={episodesSortedByViews?.slice(0, 12)}
-          renderItem={(video) => (
-            <VideoCard videoData={video} />
-          )}
+          renderItem={(video) => <VideoCard videoData={video} />}
         />
 
         <HomeSliderComp
@@ -39,9 +35,7 @@ const Home = () => {
           linkLabel={useLang("more", "المزيد")}
           link={`/${useLang("en", "ar")}/browse`}
           data={latestEpisodes?.slice(0, 12)}
-          renderItem={(video) => (
-            <VideoCard videoData={video} />
-          )}
+          renderItem={(video) => <VideoCard videoData={video} />}
         />
         {/* 
         <HomeSliderComp
@@ -106,9 +100,7 @@ const Home = () => {
         >
           <VideoCard />
         </HomeSliderComp> */}
-
       </div>
-
     </div>
   );
 };

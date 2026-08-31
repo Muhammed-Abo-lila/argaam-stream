@@ -1,0 +1,256 @@
+.heroSection {
+    isolation: isolate;
+    aspect-ratio: 16 / 9;
+    background: #080706;
+    border-block-end: 1px solid #000;
+    align-items: flex-end;
+    width: 100%;
+    min-height: 440px;
+    max-height: 80vh;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    margin-block-end: 50px;
+}
+
+.heroSection .img-wrapper {
+    z-index: -2;
+    position: absolute;
+    inset: 0;
+}
+
+.heroSection .img-wrapper img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.heroSection .heroSection-overlay {
+    z-index: -1;
+    background: linear-gradient(#0807064d 0%,
+            #0807060a 26%,
+            #08070680 52%,
+            #080706e6 70%,
+            #080706fa 100%);
+    position: absolute;
+    inset: 0;
+}
+
+.heroSection .heroSection-info-wrapper {
+    width: 100%;
+    padding-block-end: 40px;
+    max-width: 680px;
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-kicker {
+    align-items: center;
+    gap: 12px;
+    font-size: var(--fs-14);
+    color: #f6f3ecdb;
+    margin-block-end: 12px;
+    display: flex;
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-kicker .badge--onDark {
+    background: #f6f3ec24;
+    color: #f6f3ec;
+    border-radius: 100px;
+    font-size: var(--fs-12);
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-kicker a {
+    color: #f6f3ec;
+    text-decoration: none;
+    font-size: var(--fs-14);
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-title {
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #f6f3ec;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-block: 1rem;
+    display: -webkit-box;
+    overflow: hidden;
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-synopsis {
+    margin: 12px 0 0;
+    font-size: var(--fs-14);
+    line-height: 1.65;
+    color: #f6f3ecdb;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-meta {
+    align-items: center;
+    gap: 12px;
+    font-size: var(--fs-14);
+    color: #f6f3ecb8;
+    flex-wrap: wrap;
+    margin-block-start: 12px;
+    display: flex;
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-actions {
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-block-start: 20px;
+    display: flex;
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-actions .btn--primary {
+    background: var(--identity_color);
+    color: #13100f;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 20px;
+    font-size: var(--fs-14);
+    font-weight: 500;
+}
+
+.heroSection .heroSection-info-wrapper .heroSection-info-actions .btn--onDark {
+    background-color: #f6f3ec24 !important;
+    border-color: #f6f3ec24 !important;
+    color: #f6f3ec;
+    -webkit-backdrop-filter: blur(6px) !important;
+    backdrop-filter: blur(6px) !important;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 20px;
+    padding-block: 8px;
+    font-size: var(--fs-14);
+    font-weight: bold;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 720px) {
+
+    .navbar {
+        border: none !important;
+    }
+
+    .navbar .nav-links {
+        border-block-start: 1px solid #e6e0dc;
+    }
+
+    .heroSection {
+        aspect-ratio: auto;
+        width: auto;
+        min-height: 0;
+        max-height: none;
+        display: block;
+        background: #fff;
+        border-block-end: 1px solid #e6e0dc;
+    }
+
+    /* Dark mode hero background */
+    [data-bs-theme="dark"] .heroSection {
+        background: #161311;
+        border-block-end-color: #2a2522;
+    }
+
+    /* Image */
+    .heroSection .img-wrapper {
+        aspect-ratio: 16 / 9;
+        position: relative;
+        inset: auto;
+        margin-block-end: 20px;
+    }
+
+    /* No overlay on mobile */
+    .heroSection .heroSection-overlay {
+        display: none;
+    }
+
+    /* Info wrapper */
+    .heroSection .heroSection-info-wrapper {
+        max-width: none;
+        width: 100%;
+        padding-block-end: 30px;
+    }
+
+    /* Kicker */
+    .heroSection .heroSection-info-wrapper .heroSection-info-kicker .badge--onDark {
+        color: #595350;
+        background: #faf6f3;
+    }
+
+    .heroSection .heroSection-info-wrapper .heroSection-info-kicker a {
+        color: #595350;
+    }
+
+    /* Title */
+    .heroSection .heroSection-info-wrapper .heroSection-info-title {
+        color: #262220;
+        font-size: var(--fs-24);
+    }
+
+    /* Synopsis */
+    .heroSection .heroSection-info-wrapper .heroSection-info-synopsis {
+        color: #595350;
+    }
+
+    /* Meta */
+    .heroSection .heroSection-info-wrapper .heroSection-info-meta {
+        color: #76706c;
+    }
+
+    /* Secondary button */
+    .heroSection .heroSection-info-wrapper .heroSection-info-actions .btn--onDark {
+        color: #262220;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: 1px solid #d7d0cc !important;
+        background: transparent !important;
+    }
+
+
+    /* ========================================
+       MOBILE DARK MODE
+    ======================================== */
+
+    [data-bs-theme="dark"] .heroSection .heroSection-info-wrapper .heroSection-info-kicker {
+        color: #f6f3ecdb;
+    }
+
+    [data-bs-theme="dark"] .heroSection .heroSection-info-wrapper .heroSection-info-kicker .badge--onDark {
+        color: #f6f3ec;
+        background: #f6f3ec24;
+    }
+
+    [data-bs-theme="dark"] .heroSection .heroSection-info-wrapper .heroSection-info-kicker a {
+        color: #f6f3ec;
+    }
+
+    [data-bs-theme="dark"] .heroSection .heroSection-info-wrapper .heroSection-info-title {
+        color: #f6f3ec;
+    }
+
+    [data-bs-theme="dark"] .heroSection .heroSection-info-wrapper .heroSection-info-synopsis {
+        color: #f6f3ecdb;
+    }
+
+    [data-bs-theme="dark"] .heroSection .heroSection-info-wrapper .heroSection-info-meta {
+        color: #f6f3ecb8;
+    }
+
+    [data-bs-theme="dark"] .heroSection .heroSection-info-wrapper .heroSection-info-actions .btn--onDark {
+        color: #f6f3ec;
+        border-color: #595350 !important;
+        background: transparent !important;
+    }
+}
