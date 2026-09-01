@@ -266,13 +266,24 @@ body {
   border-radius: 100px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   padding: 7px 25px;
   font-size: var(--fs-14);
   font-weight: 500;
   text-decoration: none;
 }
 
+.comming-soon {
+  display: inline-block;
+  background: var(--bg_main);
+  color: var(--text_main);
+  border: 1px solid var(--text_secondary);
+  border-radius: 100px;
+  padding: 5px 10px;
+  margin-block-start: 20px;
+  font-size: var(--fs-14);
+  font-weight: 500;
+}
 
 /* =========================
    Mobile

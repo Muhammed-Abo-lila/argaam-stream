@@ -42,11 +42,10 @@ const Channel = () => {
     }
   });
   const channelDetails = getChannelByChannelId(id);
+
+  const lang = useLang("en", "ar");
   return (
     <>
-
-
-
       <div className="channel-heroSection">
         <div className="channel-wrapper">
           <img src={channelDetails?.cover} alt="card img" />
@@ -55,11 +54,13 @@ const Channel = () => {
         <div className="container-fluid">
           <div className="channel-details mb-5">
             <span
+              data-color={channelDetails?.key}
               style={{
                 display: "block",
                 width: "60px",
                 height: "2px",
                 marginBlockEnd: "20px",
+                backgroundColor: "var(--channel_color)",
               }}
             ></span>
             <h3 className="text-white custom-fs-24-30">
@@ -73,7 +74,10 @@ const Channel = () => {
             </p>
             <div className="channel-meta">
               <span>
-                {useLang(channelDetails?.kicker?.en, channelDetails?.kicker?.ar)}
+                {useLang(
+                  channelDetails?.kicker?.en,
+                  channelDetails?.kicker?.ar,
+                )}
               </span>
               <span>.</span>
               <span>
@@ -83,34 +87,38 @@ const Channel = () => {
               <span>.</span>
               <span>
                 {useLang("Launched", "انطلق")}{" "}
-                <span class="ag-num">{channelDetails?.launchedAt}</span>
+                <span className="ag-num">{channelDetails?.launchedAt}</span>
               </span>
               <span>.</span>
               <span>
-                <span class="ag-num">{episodesByChannel?.length}</span>{" "}
+                <span className="ag-num">{episodesByChannel?.length}</span>{" "}
                 {useLang("episodes", "حلقة")}
               </span>
             </div>
-            <Link
-              className="btn--primary"
-              to={`/${useLang("en", "ar")}/watch/${sortedEpisodes[0]?.id}`}
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
+            {episodesByChannel?.length > 0 ? (
+              <Link
+                className="btn--primary mt-3 d-block"
+                to={`/${useLang("en", "ar")}/watch/${sortedEpisodes[0]?.id}`}
               >
-                <path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2Z"></path>
-              </svg>
-              {useLang("Play", "تشغيل")}
-            </Link>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2Z"></path>
+                </svg>
+                {useLang("Play", "تشغيل")}
+              </Link>
+            ) : (
+              <span className="comming-soon">
+                {lang === "en" ? "Coming soon" : "سيتوفر قريباً"}
+              </span>
+            )}
           </div>
         </div>
       </div>
-
-
 
       <div className="container-fluid my-5">
         {/*section header */}
@@ -148,7 +156,6 @@ const Channel = () => {
           )}
         </div>
       </div>
-      
     </>
   );
 };

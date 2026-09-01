@@ -1,14 +1,50 @@
 import "./HeroSection.css";
 import useLang from "../../../utils/useLang";
 import { Link } from "react-router-dom";
-import { getChannelByChannelId, getEpisodesByChannelId } from "../../../data/selectorFunctions";
+import {
+  getChannelByChannelId,
+  getEpisodesByChannelId,
+} from "../../../data/selectorFunctions";
 import { formatDate, formatViews } from "../../../utils/helpers";
+import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const channelId = "onpoint";
   const channel = getChannelByChannelId(channelId);
   const episodesByChannelId = getEpisodesByChannelId(channelId);
-  const sortedPublishedEpisode = [...episodesByChannelId].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))[1];
+  const sortedPublishedEpisode = [...episodesByChannelId].sort(
+    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
+  )[1];
+
+  const [isInMyList, setIsInMyList] = useState(false);
+
+  // store episode id in an array in local storage
+  const handleAddToList = () => {
+    const storedList = JSON.parse(localStorage.getItem("myList") || "[]");
+
+    if (storedList.includes(sortedPublishedEpisode?.id)) {
+      // Remove
+      const updatedList = storedList.filter(
+        (id) => id !== sortedPublishedEpisode?.id,
+      );
+
+      localStorage.setItem("myList", JSON.stringify(updatedList));
+      setIsInMyList(false);
+    } else {
+      // Add
+      const updatedList = [...storedList, sortedPublishedEpisode?.id];
+
+      localStorage.setItem("myList", JSON.stringify(updatedList));
+      setIsInMyList(true);
+    }
+  };
+
+  // to check if user has been added this video in his list before
+  useEffect(() => {
+    const storedList = JSON.parse(localStorage.getItem("myList") || "[]");
+
+    setIsInMyList(storedList.includes(sortedPublishedEpisode?.id));
+  }, [sortedPublishedEpisode?.id]);
 
   return (
     <section className="heroSection">
@@ -29,17 +65,26 @@ const HeroSection = () => {
               <span className="badge badge--onDark">
                 {useLang("Featured episode", "حلقة مميزة")}
               </span>
-              <Link to={`/${useLang("en", "ar")}/channel/${channel?.id}`} data-discover="true">
+              <Link
+                to={`/${useLang("en", "ar")}/channel/${channel?.id}`}
+                data-discover="true"
+              >
                 {useLang("Argaam OnPoint", "أرقام أون بوينت")}
               </Link>
             </div>
 
             <h2 className="heroSection-info-title">
-              {useLang(sortedPublishedEpisode?.title?.en, sortedPublishedEpisode?.title?.ar)}
+              {useLang(
+                sortedPublishedEpisode?.title?.en,
+                sortedPublishedEpisode?.title?.ar,
+              )}
             </h2>
 
             <p className="heroSection-info-synopsis">
-              {useLang(sortedPublishedEpisode?.synopsis?.en, sortedPublishedEpisode?.synopsis?.ar)}
+              {useLang(
+                sortedPublishedEpisode?.synopsis?.en,
+                sortedPublishedEpisode?.synopsis?.ar,
+              )}
             </p>
             <div className="heroSection-info-meta">
               <span>
@@ -48,7 +93,10 @@ const HeroSection = () => {
               </span>
               <span className="dot">·</span>
               <span>
-                <span className="ag-num">{sortedPublishedEpisode?.durationMin}</span> {useLang("min", "دقيقة")}
+                <span className="ag-num">
+                  {sortedPublishedEpisode?.durationMin}
+                </span>{" "}
+                {useLang("min", "دقيقة")}
               </span>
               <span className="dot">·</span>
               <span className="ag-num" dir="ltr">
@@ -56,7 +104,9 @@ const HeroSection = () => {
               </span>
               <span className="dot">·</span>
               <span>
-                <span className="ag-num">{formatViews(sortedPublishedEpisode?.views)}</span>{" "}
+                <span className="ag-num">
+                  {formatViews(sortedPublishedEpisode?.views)}
+                </span>{" "}
                 {useLang("views", "مشاهدة")}
               </span>
             </div>
@@ -77,23 +127,48 @@ const HeroSection = () => {
                 </svg>
                 {useLang("Play", "تشغيل")}
               </Link>
-              <button type="button" className="btn btn--onDark">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14M5 12h14"></path>
-                </svg>
-                {useLang("Add to my list", "أضف إلي قائمتي")}
+              <button
+                type="button"
+                className="btn btn--onDark"
+                onClick={handleAddToList}
+              >
+                {isInMyList ? (
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m5 12 4 4L19 6" />
+                  </svg>
+                ) : (
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                )}
+                {isInMyList
+                  ? useLang("In my list", "في قائمتي")
+                  : useLang("Add to my list", "أضف إلي قائمتي")}
               </button>
-              <Link className="btn btn--onDark" to={`/${useLang("en", "ar")}/channel/${channel?.id}`}>
+              <Link
+                className="btn btn--onDark"
+                to={`/${useLang("en", "ar")}/channel/${channel?.id}`}
+              >
                 <svg
                   width="18"
                   height="18"

@@ -9,10 +9,6 @@ import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
 import Watch from "./pages/Watch/Watch";
 import useLang from "./utils/useLang";
-<<<<<<< HEAD
-=======
-
->>>>>>> edced2938b044dfa42b53515503751dcb3700d4c
 const Home = lazy(() => import("./pages/Home/Home"));
 const Channels = lazy(() => import("./pages/Channels/Channels"));
 const Channel = lazy(() => import("./pages/Channel/Channel"));

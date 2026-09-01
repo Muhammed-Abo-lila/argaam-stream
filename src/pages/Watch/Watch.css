@@ -5,6 +5,7 @@
     max-height: 80vh;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
 
 .video-cover-wrapper img {
