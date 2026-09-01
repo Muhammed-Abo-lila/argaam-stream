@@ -96,7 +96,7 @@ const Header = () => {
             <Link className="logo" to={`/${lang}`}>
               <img
                 src={theme === "dark" ? dark_logo : light_logo}
-                 alt={useLang("argaam company logo","شعار شركه أرقام")}
+                alt={useLang("argaam company logo", "شعار شركه أرقام")}
                 loading="lazy"
               />
               <span>{useLang("originals", "فيديو")}</span>
@@ -199,26 +199,22 @@ const Header = () => {
 
                     {(searchResults.channels.length > 0 ||
                       searchResults.episodes.length > 0) && (
-                      <div className="search-dropdown-actions">
-                        <Link
-                          to={`/${lang}/search?q=${encodeURIComponent(searchTerm.trim())}`}
-                          onClick={() => setSearchTerm("")}
-                        >
-                          {lang === "en" ? "View all" : "عرض الكل"}
-                        </Link>
-                      </div>
-                    )}
+                        <div className="search-dropdown-actions">
+                          <Link
+                            to={`/${lang}/search?q=${encodeURIComponent(searchTerm.trim())}`}
+                            onClick={() => setSearchTerm("")}
+                          >
+                            {lang === "en" ? "View all" : "عرض الكل"}
+                          </Link>
+                        </div>
+                      )}
                   </div>
                 )}
               </div>
               {/* icons */}
               <div
                 className="icon"
-<<<<<<< HEAD
-                onClick={() => changeLanguage(lang==="en"?"ar":"en")}
-=======
                 onClick={() => changeLanguage(lang === "en" ? "ar" : "en")}
->>>>>>> 1402d1b7b7df65d8e8f859eae29018863d723e15
               >
                 <span>{useLang("ع", "EN")}</span>
               </div>

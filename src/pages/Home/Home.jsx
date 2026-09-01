@@ -4,14 +4,13 @@ import HomeSliderComp from "../../components/ui/HomeSliderComp/HomeSliderComp";
 import ChannelCard from "../../components/common/ChannelCard/ChannelCard";
 import { channels } from "../../data/channelsData";
 import { getEpisodesByChannelId, getEpisodesSortedByViews, getLatestEpisodes } from "../../data/selectorFunctions";
-import HeroSection from "../../layouts/HeroSection/HeroSection";
+import HeroSection from "../../components/ui/HeroSection/HeroSection";
 const Home = () => {
   const episodesSortedByViews = getEpisodesSortedByViews();
   const latestEpisodes = getLatestEpisodes();
   return (
     <>
       <HeroSection />
-      <h1 className="text-danger">متنساش تنقل الداتا الجديده من البروجكت القديم </h1>
       <div className="container-fluid pb-5 mb-5">
         <div className="d-flex flex-column gap-5">
 

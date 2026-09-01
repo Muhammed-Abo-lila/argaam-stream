@@ -3,6 +3,7 @@ import useLang from '../../../utils/useLang'
 import { Link } from "react-router-dom";
 import { getChannelByChannelId } from "../../../data/selectorFunctions";
 import { useState } from "react";
+import { formatViews } from "../../../utils/helpers";
 const VideoCard = ({ videoData }) => {
   const [imageQuality, setImageQuality] = useState("maxresdefault");
   // get channel data depend on channelId to set color and channel name
@@ -18,7 +19,7 @@ const VideoCard = ({ videoData }) => {
               <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2Z"></path></svg>
             </div>
           </div>
-
+          <div className="position-absolute bottom-0 end-0 bg-black opacity-75 text-white px-2 py-1 m-2 rounded-pill">{videoData?.durationMin} {useLang("min","دقيقه")}</div>
           <img
             className="card-img-top rounded-0"
             src={`https://i.ytimg.com/vi/${videoData?.youtubeId}/${imageQuality}.jpg`}
@@ -46,7 +47,7 @@ const VideoCard = ({ videoData }) => {
           <div className='d-flex justify-content-start align-items-center gap-1 theme_text_secondary'>
             <p className="card-text m-0">{useLang("episode", "الحلقه")} {videoData?.number}</p>
             <span>.</span>
-            <p className="card-text m-0 bg_main">{Math.round(videoData?.views / 1000)}k {useLang("views", "مشاهده")}</p>
+            <p className="card-text m-0 bg_main">{formatViews(videoData?.views)} {useLang("views", "مشاهده")}</p>
           </div>
         </div>
       </div>

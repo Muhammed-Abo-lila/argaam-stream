@@ -1,11 +1,15 @@
 import "./HeroSection.css";
-
-// img cover
-import OnpointCover from "../../assets/covers/onpoint.png";
-import useLang from "../../utils/useLang";
+import useLang from "../../../utils/useLang";
 import { Link } from "react-router-dom";
+import { getChannelByChannelId, getEpisodesByChannelId } from "../../../data/selectorFunctions";
+import { formatDate, formatViews } from "../../../utils/helpers";
 
 const HeroSection = () => {
+  const channelId = "onpoint";
+  const channel = getChannelByChannelId(channelId);
+  const episodesByChannelId = getEpisodesByChannelId(channelId);
+  const sortedPublishedEpisode = [...episodesByChannelId].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))[1];
+
   return (
     <section className="heroSection">
       <div className="container-fluid">
@@ -14,7 +18,7 @@ const HeroSection = () => {
             alt="Argaam OnPoint"
             fetchPriority="high"
             decoding="async"
-            src={OnpointCover}
+            src={channel?.cover}
           />
         </div>
         <div className="heroSection-overlay"></div>
@@ -25,46 +29,41 @@ const HeroSection = () => {
               <span className="badge badge--onDark">
                 {useLang("Featured episode", "حلقة مميزة")}
               </span>
-              <a href="/channel/onpoint" data-discover="true">
+              <Link to={`/${useLang("en", "ar")}/channel/${channel?.id}`} data-discover="true">
                 {useLang("Argaam OnPoint", "أرقام أون بوينت")}
-              </a>
+              </Link>
             </div>
-            <h1 className="heroSection-info-title">
-              {useLang(
-                "Why Global Startups Are Choosing Saudi Arabia | Sultan Moraished",
-                "لماذا تختار الشركات الناشئة العالمية السعودية | سلطان مريشد",
-              )}
-            </h1>
+
+            <h2 className="heroSection-info-title">
+              {useLang(sortedPublishedEpisode?.title?.en, sortedPublishedEpisode?.title?.ar)}
+            </h2>
+
             <p className="heroSection-info-synopsis">
-              {useLang(
-                "Sultan Moraished, Chief Technology Officer at Red Sea Global, tells Somi Arian how one of Saudi Arabia's most ambitious giga projects turns vision into reality through technology and long-term thinking. He covers",
-                "يتحدث سلطان مريشد، الرئيس التنفيذي للتقنية في البحر الأحمر الدولي، إلى سومي أريان عن كيفية تحويل أحد أكثر المشاريع الكبرى طموحًا في السعودية من رؤية إلى واقع عبر التقنية والتخطيط طويل الأمد. ويتناول التقنية غير المرئية التي تشغّل الوجهة السياحية، وتبنّي الذكاء الاصطناعي، وتطوير المواهب المحلية، والفرص التي يفتحها ذلك أمام الشركات الناشئة.",
-              )}
-              ...
+              {useLang(sortedPublishedEpisode?.synopsis?.en, sortedPublishedEpisode?.synopsis?.ar)}
             </p>
             <div className="heroSection-info-meta">
               <span>
                 {useLang("Episode", "الحلقة")}{" "}
-                <span className="ag-num">11</span>
+                <span className="ag-num">{sortedPublishedEpisode?.number}</span>
               </span>
               <span className="dot">·</span>
               <span>
-                <span className="ag-num">50</span> {useLang("min", "دقيقة")}
+                <span className="ag-num">{sortedPublishedEpisode?.durationMin}</span> {useLang("min", "دقيقة")}
               </span>
               <span className="dot">·</span>
               <span className="ag-num" dir="ltr">
-                09.Aug.2026
+                {formatDate(sortedPublishedEpisode?.publishedAt)}
               </span>
               <span className="dot">·</span>
               <span>
-                <span className="ag-num">128K</span>{" "}
+                <span className="ag-num">{formatViews(sortedPublishedEpisode?.views)}</span>{" "}
                 {useLang("views", "مشاهدة")}
               </span>
             </div>
             <div className="heroSection-info-actions">
               <Link
                 className="btn btn--primary"
-                to={`/${useLang("en", "ar")}/watch/onpoint-e11`}
+                to={`/${useLang("en", "ar")}/watch/${sortedPublishedEpisode?.id}`}
                 data-discover="true"
               >
                 <svg
@@ -94,11 +93,7 @@ const HeroSection = () => {
                 </svg>
                 {useLang("Add to my list", "أضف إلي قائمتي")}
               </button>
-              <Link
-                className="btn btn--onDark"
-                href="/channel/onpoint"
-                data-discover="true"
-              >
+              <Link className="btn btn--onDark" to={`/${useLang("en", "ar")}/channel/${channel?.id}`}>
                 <svg
                   width="18"
                   height="18"
