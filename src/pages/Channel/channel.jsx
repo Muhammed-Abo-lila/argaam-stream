@@ -9,9 +9,9 @@ import {
   getEpisodesByChannelId,
 } from "../../data/selectorFunctions";
 const Channel = () => {
-  const { slug } = useParams();
+  const { id } = useParams();  
   const [activeSort, setActiveSort] = useState("newest");
-  const episodesByChannel = getEpisodesByChannelId(slug);
+  const episodesByChannel = getEpisodesByChannelId(id);
   const sortList = [
     {
       key: "newest",
@@ -41,10 +41,14 @@ const Channel = () => {
         return 0;
     }
   });
-  const channelDetails = getChannelByChannelId(slug);
+  const channelDetails = getChannelByChannelId(id);
+console.log("channelDetails===>",channelDetails);
 
   return (
     <>
+
+
+
       <div className="channel-heroSection">
         <div className="channel-wrapper">
           <img src={channelDetails?.cover} alt="card img" />
@@ -57,42 +61,41 @@ const Channel = () => {
                 display: "block",
                 width: "60px",
                 height: "2px",
-                backgroundColor: channelDetails.key,
                 marginBlockEnd: "20px",
               }}
             ></span>
             <h3 className="text-white custom-fs-24-30">
-              {useLang(channelDetails.name.en, channelDetails.name.ar)}
+              {useLang(channelDetails?.name?.en, channelDetails?.name?.ar)}
             </h3>
             <p>
               {useLang(
-                channelDetails.description.en,
-                channelDetails.description.ar,
+                channelDetails?.description?.en,
+                channelDetails?.description?.ar,
               )}
             </p>
             <div className="channel-meta">
               <span>
-                {useLang(channelDetails.kicker.en, channelDetails.kicker.ar)}
+                {useLang(channelDetails?.kicker?.en, channelDetails?.kicker?.ar)}
               </span>
               <span>.</span>
               <span>
                 {useLang("Hosted by", "يقدّمه")}{" "}
-                {useLang(channelDetails.host.en, channelDetails.host.ar)}
+                {useLang(channelDetails?.host?.en, channelDetails?.host?.ar)}
               </span>
               <span>.</span>
               <span>
                 {useLang("Launched", "انطلق")}{" "}
-                <span class="ag-num">{channelDetails.launchedAt}</span>
+                <span class="ag-num">{channelDetails?.launchedAt}</span>
               </span>
               <span>.</span>
               <span>
-                <span class="ag-num">{episodesByChannel.length}</span>{" "}
+                <span class="ag-num">{episodesByChannel?.length}</span>{" "}
                 {useLang("episodes", "حلقة")}
               </span>
             </div>
             <Link
               className="btn--primary"
-              to={`/${useLang("en", "ar")}/watch/${sortedEpisodes[0].id}`}
+              to={`/${useLang("en", "ar")}/watch/${sortedEpisodes[0]?.id}`}
             >
               <svg
                 width="18"
@@ -108,6 +111,9 @@ const Channel = () => {
           </div>
         </div>
       </div>
+
+
+
       <div className="container-fluid my-5">
         {/*section header */}
         <div className="d-flex justify-content-between align-items-center flex-wrap row-gap-2">
@@ -132,9 +138,9 @@ const Channel = () => {
             ))
           ) : (
             <EmptyComp
-              titleEn="no episodes listed"
+              titleEn="this show has not launched yet"
               titleAr="لا توجد حلقات مُدرجة"
-              subTitleEn="this show has launched, but no episodes are published on argaam’s youTube channel yet, so there is nothing to play here."
+              subTitleEn="The episode schedule will appear here as soon as the show launches."
               subTitleAr="انطلق هذا البرنامج، لكن لا توجد له حلقات منشورة على قناة أرقام في يوتيوب حتى الآن، فلا يمكن تشغيله هنا."
               isLink={true}
               linkLabelEn="browse all"
