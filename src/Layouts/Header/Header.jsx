@@ -93,7 +93,7 @@ const Header = () => {
         <div className="row w-100 m-auto row-gap-3">
           {/* logo */}
           <div className="col-sm-12 col-md-6 col-lg-2">
-            <Link className="logo" to={`/${lang}/home`}>
+            <Link className="logo" to={`/${lang}`}>
               <img
                 src={theme === "dark" ? dark_logo : light_logo}
                 alt="logo"
@@ -214,7 +214,7 @@ const Header = () => {
               {/* icons */}
               <div
                 className="icon"
-                onClick={() => changeLanguage(useLang("ar", "en"))}
+                onClick={() => changeLanguage(lang === "en" ? "ar" : "en")}
               >
                 <span>{useLang("ع", "EN")}</span>
               </div>

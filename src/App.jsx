@@ -8,7 +8,7 @@ import {
 import Layout from "./Layout";
 import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
-import Watch from "./pages/Watch/[videoId]";
+import Watch from "./pages/Watch/Watch";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const Channels = lazy(() => import("./pages/Channels/Channels"));
