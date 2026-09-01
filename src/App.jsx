@@ -8,17 +8,15 @@ import {
 import Layout from "./Layout";
 import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
-import Watch from "./pages/Watch/Watch";
-import useLang from "./utils/useLang";
 const Home = lazy(() => import("./pages/Home/Home"));
 const Channels = lazy(() => import("./pages/Channels/Channels"));
 const Channel = lazy(() => import("./pages/Channel/Channel"));
 const BrowseAll = lazy(() => import("./pages/BrowseAll/BrowseAll"));
 const MyList = lazy(() => import("./pages/MyList/MyList"));
 const Search = lazy(() => import("./pages/Search/Search"));
+const Watch = lazy(() => import("./pages/Watch/Watch"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
-  
   const supportedLanguages = i18n.options.supportedLngs;
 
   const LanguageLayout = () => {
