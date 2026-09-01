@@ -7,10 +7,12 @@ import { getEpisodesByChannelId } from "../../data/selectorFunctions";
 import { channels } from "../../data/channelsData";
 import { episodesData } from "../../data/episodesData";
 import { getEpisodeLabel } from "../../utils/helpers";
+import { useLocation } from "react-router-dom";
 const BrowseAll = () => {
-  const lang=useLang("en","ar")
+  const location = useLocation();
+  const lang = useLang("en", "ar")
   const [activeChannelId, setActiveChannelId] = useState("all")
-  const [activeSort, setActiveSort] = useState("newest")
+  const [activeSort, setActiveSort] = useState(location?.state||"newest")
   const [filteredEpisodes, setFilteredEpisodes] = useState(episodesData);
 
   const handleSelectChannelAndFilterEpisodes = (channelId) => {

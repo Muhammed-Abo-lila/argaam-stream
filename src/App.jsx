@@ -3,7 +3,6 @@ import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
-  useParams,
 } from "react-router-dom";
 import Layout from "./Layout";
 import { useTranslation } from "react-i18next";
@@ -12,7 +11,7 @@ import Watch from "./pages/Watch/Watch";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const Channels = lazy(() => import("./pages/Channels/Channels"));
-const Channel = lazy(() => import("./pages/Channel/[slug]"));
+const Channel = lazy(() => import("./pages/Channel/channel"));
 const BrowseAll = lazy(() => import("./pages/BrowseAll/BrowseAll"));
 const MyList = lazy(() => import("./pages/MyList/MyList"));
 const Search = lazy(() => import("./pages/Search/Search"));
@@ -20,7 +19,7 @@ const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
   const supportedLanguages = i18n.options.supportedLngs;
   const LanguageLayout = () => {
-    const { lang } = useParams();
+    const lang = useLang("en", "ar")
     const { i18n } = useTranslation();
     if (!supportedLanguages.includes(lang)) {
       return <Navigate to={`/${i18n.language}`} replace />;
@@ -30,6 +29,9 @@ function App() {
 
   const router = createBrowserRouter([
     {
+      path: "/",
+      element: <Navigate to="/en" replace />,
+    }, {
       path: ":lang",
       element: <LanguageLayout />,
       children: [
@@ -42,7 +44,7 @@ function App() {
           element: <Channels />,
         },
         {
-          path: "channel/:slug",
+          path: "channel/:id",
           element: <Channel />,
         },
         {
@@ -58,14 +60,18 @@ function App() {
           element: <Search />,
         },
         {
+          path: "not-found",
+          element: <NotFound />,
+        },
+        {
           path: "watch/:id",
           element: <Watch />,
         },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
       ],
-    },
-    {
-      path: "*",
-      element: <NotFound />,
     },
   ]);
 
