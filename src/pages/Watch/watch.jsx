@@ -7,22 +7,13 @@ import useLang from "../../utils/useLang";
 import { useState } from "react";
 
 const Watch = () => {
-  const [imageQualities, setImageQualities] = useState({});
+  const [imageQuality, setImageQuality] = useState("maxresdefault");
 
   const { id } = useParams();
 
   const episodeDetails = episodesData?.find((episode) => episode.id === id);
-  const episodesByChannelId = episodeDetails ? getEpisodesByChannelId(episodeDetails.channelId) : [];
 
-  const getQuality = (episodeId) => imageQualities[episodeId] || "maxresdefault";
-
-  const handleQualityFallback = (episodeId, currentQuality, naturalWidth, fallback = "mqdefault") => {
-    if (currentQuality === "maxresdefault" && naturalWidth <= 120) {
-      setImageQualities((prev) => ({ ...prev, [episodeId]: fallback }));
-    }
-  };
-
-  const mainQuality = getQuality(episodeDetails.id);
+  const episodesByChannelId = getEpisodesByChannelId(episodeDetails.channelId);
 
   return (
     <div className="watch-details">
@@ -30,22 +21,25 @@ const Watch = () => {
         <div className="player__frame">
           <button type="button" className="player__poster">
             <img
-              key={episodeDetails.youtubeId}
               className="thumb"
               alt="episode cover"
               loading="lazy"
               decoding="async"
-              src={`https://i.ytimg.com/vi/${episodeDetails?.youtubeId}/${mainQuality}.jpg`}
+              src={`https://i.ytimg.com/vi/${episodeDetails?.youtubeId}/${imageQuality}.jpg`}
               onLoad={(e) => {
-                handleQualityFallback(episodeDetails.id, mainQuality, e.currentTarget.naturalWidth);
+                if (
+                  imageQuality === "maxresdefault" &&
+                  e.currentTarget.naturalWidth < 120
+                ) {
+                  setImageQuality("mqdefault");
+                }
               }}
               onError={() => {
-                if (mainQuality === "maxresdefault") {
-                  setImageQualities((prev) => ({ ...prev, [episodeDetails.id]: "mqdefault" }));
+                if (imageQuality === "maxresdefault") {
+                  setImageQuality("mqdefault");
                 }
               }}
             />
-
             <span className="player__posterScrim" />
             <span className="player__posterBtn">
               <svg
@@ -74,50 +68,52 @@ const Watch = () => {
                     "المزيد من أرقام ويك إند",
                   )}
                 </h2>
-                {episodesByChannelId.map((episode) => {
-                  const quality = getQuality(episode.id);
-                  return (
-                    <Link
-                      key={episode.id}
-                      className={`d-flex align-items-flexStart gap-3 p-3 text-decoration-none`}
-                      aria-current="true"
-                      to={`/${useLang("en", "ar")}/watch/${episode.id}`}
-                      data-discover="true"
-                    >
-                      <div className="row__art">
-                        <img
-                          className="thumb"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          src={`https://i.ytimg.com/vi/${episode.youtubeId}/${quality}.jpg`}
-                          onLoad={(e) => {
-                            handleQualityFallback(episode.id, quality, e.currentTarget.naturalWidth);
-                          }}
-                          onError={() => {
-                            if (quality === "maxresdefault") {
-                              setImageQualities((prev) => ({ ...prev, [episode.id]: "sddefault" }));
-                            }
-                          }}
-                        />
+                {episodesByChannelId.map((episode) => (
+                  <Link
+                    key={episode.id}
+                    className={`d-flex align-items-flexStart gap-3 p-3 text-decoration-none`}
+                    aria-current="true"
+                    to={`/${useLang("en", "ar")}/watch/${episode.id}`}
+                    data-discover="true"
+                  >
+                    <div className="row__art">
+                      <img
+                        className="thumb"
+                        alt
+                        loading="lazy"
+                        decoding="async"
+                        src={`https://i.ytimg.com/vi/${episode.youtubeId}/${imageQuality}.jpg`}
+                        onLoad={(e) => {
+                          if (
+                            imageQuality === "maxresdefault" &&
+                            e.currentTarget.naturalWidth < 120
+                          ) {
+                            setImageQuality("mqdefault");
+                          }
+                        }}
+                        onError={() => {
+                          if (imageQuality === "maxresdefault") {
+                            setImageQuality("mqdefault");
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="row__body">
+                      <h3 className="row__title">
+                        {useLang(episode.title.en, episode.title.ar)}
+                      </h3>
+                      <div className="row__meta">
+                        {useLang("episode", "الحلقة")}{" "}
+                        <span className="ag-num">{episode.number}</span>
+                        <span className="dot"> · </span>
+                        <span className="ag-num">
+                          {episode.durationMin}
+                        </span>{" "}
+                        {useLang("min", "دقيقة")}
                       </div>
-                      <div className="row__body">
-                        <h3 className="row__title">
-                          {useLang(episode.title.en, episode.title.ar)}
-                        </h3>
-                        <div className="row__meta">
-                          {useLang("episode", "الحلقة")}{" "}
-                          <span className="ag-num">{episode.number}</span>
-                          <span className="dot"> · </span>
-                          <span className="ag-num">
-                            {episode.durationMin}
-                          </span>{" "}
-                          {useLang("min", "دقيقة")}
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
+                    </div>
+                  </Link>
+                ))}
               </aside>
             </div>
           </div>
