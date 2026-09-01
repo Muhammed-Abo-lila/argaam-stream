@@ -99,7 +99,7 @@
 
 /* about video */
 .vidoe-about {
-    border-block-start: 1px solid #dee2e6;
+    border-block-start: 1px solid var(--border_color);
     padding-block-start: 25px;
 }
 
@@ -150,7 +150,7 @@
 
 .watch-videos h2 {
     padding: 24px;
-    border-block-end: 1px solid #dee2e6;
+    border-block-end: 1px solid var(--border_color);
     font-size: var(--fs-14);
     font-weight: 600;
     color: var(--text_secondary);

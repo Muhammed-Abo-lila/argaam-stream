@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import {
   getChannelByChannelId,
   getEpisodesByChannelId,
@@ -11,17 +11,15 @@ import { useEffect, useState } from "react";
 import NotFound from "../NotFound/NotFound";
 
 const Watch = () => {
-  const lang = useLang("en", "ar");
-
+  const [imageQualities, setImageQualities] = useState({});
   const [imageQuality, setImageQuality] = useState("maxresdefault");
 
+  const lang = useLang("en", "ar");
   const { id } = useParams();
 
   const episodeDetails = episodesData?.find((episode) => episode?.id === id);
 
-  if (!episodeDetails) {
-    return <NotFound />;
-  }
+
 
   const episodesByChannelId = getEpisodesByChannelId(episodeDetails?.channelId);
 
@@ -35,15 +33,15 @@ const Watch = () => {
   const handleAddToList = () => {
     const storedList = JSON.parse(localStorage.getItem("myList") || "[]");
 
-    if (storedList.includes(episodeDetails.id)) {
+    if (storedList?.includes(episodeDetails?.id)) {
       // Remove
-      const updatedList = storedList.filter((id) => id !== episodeDetails.id);
+      const updatedList = storedList?.filter((id) => id !== episodeDetails?.id);
 
       localStorage.setItem("myList", JSON.stringify(updatedList));
       setIsInMyList(false);
     } else {
       // Add
-      const updatedList = [...storedList, episodeDetails.id];
+      const updatedList = [...storedList, episodeDetails?.id];
 
       localStorage.setItem("myList", JSON.stringify(updatedList));
       setIsInMyList(true);
@@ -69,9 +67,31 @@ const Watch = () => {
   useEffect(() => {
     const storedList = JSON.parse(localStorage.getItem("myList") || "[]");
 
-    setIsInMyList(storedList.includes(episodeDetails.id));
-  }, [episodeDetails.id]);
+    setIsInMyList(storedList?.includes(episodeDetails?.id));
+  }, [episodeDetails?.id]);
 
+
+
+
+
+
+
+  const getQuality = (episodeId) => imageQualities[episodeId] || "maxresdefault";
+
+  const handleQualityFallback = (episodeId, currentQuality, naturalWidth, fallback = "sddefault") => {
+    if (currentQuality === "maxresdefault" && naturalWidth <= 120) {
+      setImageQualities((prev) => ({ ...prev, [episodeId]: fallback }));
+    }
+  };
+
+  const mainQuality = getQuality(episodeDetails?.id);
+
+
+
+
+  if (!episodeDetails) {
+    return <NotFound />;
+  }
   return (
     <div className="watch-details">
       {/* video cover wrapper */}
@@ -79,21 +99,18 @@ const Watch = () => {
         {!isPlaying ? (
           <>
             <img
+              key={episodeDetails.youtubeId}
+              className="thumb"
               alt="episode cover"
               loading="lazy"
               decoding="async"
-              src={`https://i.ytimg.com/vi/${episodeDetails.youtubeId}/${imageQuality}.jpg`}
+              src={`https://i.ytimg.com/vi/${episodeDetails?.youtubeId}/${mainQuality}.jpg`}
               onLoad={(e) => {
-                if (
-                  imageQuality === "maxresdefault" &&
-                  e.currentTarget.naturalWidth <= 120
-                ) {
-                  setImageQuality("mqdefault");
-                }
+                handleQualityFallback(episodeDetails.id, mainQuality, e.currentTarget.naturalWidth);
               }}
               onError={() => {
-                if (imageQuality === "maxresdefault") {
-                  setImageQuality("mqdefault");
+                if (mainQuality === "maxresdefault") {
+                  setImageQualities((prev) => ({ ...prev, [episodeDetails.id]: "sddefault" }));
                 }
               }}
             />
@@ -127,7 +144,7 @@ const Watch = () => {
       <div className="container-fluid">
         <div className="watch-wrap mb-5">
           <div className="row w-100 mx-auto">
-            <div className="col-12 col-md-7 col-lg-9 py-5 border">
+            <div className="col-12 col-md-7 col-lg-9 py-5 border theme_border_color">
               <div className="video-meta mb-3">
                 <span
                   style={{
@@ -281,7 +298,7 @@ const Watch = () => {
             </div>
 
             {/* side episodes */}
-            <div className="col-12 col-md-5 col-lg-3 p-0 border">
+            <div className="col-12 col-md-5 col-lg-3 p-0 border theme_border_color">
               <aside className="watch-videos">
                 <h2>
                   {useLang(
@@ -290,52 +307,50 @@ const Watch = () => {
                   )}
                 </h2>
                 <div className="aside-videos">
-                  {episodesByChannelId.map((episode) => (
-                    <Link
-                      key={episode.id}
-                      className={`video-card d-flex align-items-flexStart gap-3 p-3 text-decoration-none mb-2 ${episode.id === episodeDetails.id ? "active" : "null"}`}
-                      aria-current="true"
-                      to={`/${useLang("en", "ar")}/watch/${episode.id}`}
-                      data-discover="true"
-                    >
-                      <div className="row__art">
-                        <img
-                          className="thumb"
-                          alt="thumb"
-                          loading="lazy"
-                          decoding="async"
-                          src={`https://i.ytimg.com/vi/${episode.youtubeId}/${imageQuality}.jpg`}
-                          onLoad={(e) => {
-                            if (
-                              imageQuality === "maxresdefault" &&
-                              e.currentTarget.naturalWidth < 120
-                            ) {
-                              setImageQuality("mqdefault");
-                            }
-                          }}
-                          onError={() => {
-                            if (imageQuality === "maxresdefault") {
-                              setImageQuality("mqdefault");
-                            }
-                          }}
-                        />
-                      </div>
-                      <div className="row__body">
-                        <h3 className="row__title">
-                          {useLang(episode.title.en, episode.title.ar)}
-                        </h3>
-                        <div className="row__meta">
-                          {useLang("episode", "الحلقة")}{" "}
-                          <span className="ag-num">{episode.number}</span>
-                          <span className="dot"> · </span>
-                          <span className="ag-num">
-                            {episode.durationMin}
-                          </span>{" "}
-                          {useLang("min", "دقيقة")}
+                  {episodesByChannelId.map((episode) => {
+                    const quality = getQuality(episode.id);
+                    return (
+                      <Link
+                        key={episode.id}
+                        className={`video-card d-flex align-items-flexStart gap-3 p-3 text-decoration-none mb-2 ${episode.id === episodeDetails.id ? "active" : "null"}`}
+                        aria-current="true"
+                        to={`/${useLang("en", "ar")}/watch/${episode.id}`}
+                        data-discover="true"
+                      >
+                        <div className="row__art">
+                          <img
+                            className="thumb"
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            src={`https://i.ytimg.com/vi/${episode.youtubeId}/${quality}.jpg`}
+                            onLoad={(e) => {
+                              handleQualityFallback(episode.id, quality, e.currentTarget.naturalWidth);
+                            }}
+                            onError={() => {
+                              if (quality === "maxresdefault") {
+                                setImageQualities((prev) => ({ ...prev, [episode.id]: "sddefault" }));
+                              }
+                            }}
+                          />
                         </div>
-                      </div>
-                    </Link>
-                  ))}
+                        <div className="row__body">
+                          <h3 className="row__title">
+                            {useLang(episode.title.en, episode.title.ar)}
+                          </h3>
+                          <div className="row__meta">
+                            {useLang("episode", "الحلقة")}{" "}
+                            <span className="ag-num">{episode.number}</span>
+                            <span className="dot"> · </span>
+                            <span className="ag-num">
+                              {episode.durationMin}
+                            </span>{" "}
+                            {useLang("min", "دقيقة")}
+                          </div>
+                        </div>
+                      </Link>
+                    )
+                  })}
                 </div>
               </aside>
             </div>

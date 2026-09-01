@@ -4,6 +4,7 @@
   --identity_color: #b15903;
   --bg_main: #ffffff;
   --bg_secondary: #faf6f3;
+  --border_color:#e6e0dc;
   --text_main: #262220;
   --text_secondary: #595350;
   --data_color_orange: #c67e4e;
@@ -31,6 +32,7 @@
   --identity_color: #fe9141;
   --bg_main: #161311;
   --bg_secondary: #1e1b19;
+  --border_color:#3f3a37;
   --text_main: #f6f3ec;
   --text_secondary: #b6afab;
   --data_color_orange: #c07848;
@@ -111,7 +113,9 @@ body {
 .theme_text_secondary {
   color: var(--text_secondary);
 }
-
+.theme_border_color{
+  border-color: var(--border_color) !important;
+}
 .footer_main_color {
   color: #f6f3ec;
 }
@@ -209,7 +213,7 @@ body {
   isolation: isolate;
   aspect-ratio: 16 / 9;
   background: #080706;
-  border-block-end: 1px solid #e6e0dc;
+  border-block-end: 1px solid var(--border_color);
   align-items: flex-end;
   width: 100%;
   min-height: 400px;
@@ -275,9 +279,9 @@ body {
 
 .comming-soon {
   display: inline-block;
-  background: var(--bg_main);
-  color: var(--text_main);
-  border: 1px solid var(--text_secondary);
+  background: rgba(0,0,0,15%);
+  color: white;
+  border: 1px solid var(--border_color);
   border-radius: 100px;
   padding: 5px 10px;
   margin-block-start: 20px;
@@ -298,7 +302,7 @@ body {
     max-height: none;
     display: block;
     background: #fff;
-    border-block-end: 1px solid #e6e0dc;
+    border-block-end: 1px solid var(--border_color);
     overflow: hidden;
     background-color: var(--bg_main);
   }
