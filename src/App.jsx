@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
+  useParams,
 } from "react-router-dom";
 import Layout from "./Layout";
 import { useTranslation } from "react-i18next";
@@ -18,20 +19,23 @@ const Search = lazy(() => import("./pages/Search/Search"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
   const supportedLanguages = i18n.options.supportedLngs;
+
   const LanguageLayout = () => {
-    const lang = useLang("en", "ar")
-    const { i18n } = useTranslation();
+    const { lang } = useParams();
+
     if (!supportedLanguages.includes(lang)) {
       return <Navigate to={`/${i18n.language}`} replace />;
     }
+
     return <Layout />;
   };
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Navigate to="/en" replace />,
-    }, {
+      element: <Navigate to={`/${i18n.language}`} replace />,
+    },
+    {
       path: ":lang",
       element: <LanguageLayout />,
       children: [

@@ -99,7 +99,7 @@ const Search = () => {
             <h4 className="custom-fs-18 fw-bold mb-3">
               {lang === "en" ? "No matching results" : "لا توجد نتائج مطابقة"}
             </h4>
-            <p className="custom-fs-14 theme_text_secondary">
+            <p className="custom-fs-14 theme_text_secondary text-center">
               {lang === "en"
                 ? "Try a channel name or a topic such as “earnings” or “rates”."
                 : "جرّب اسم قناة أو موضوعاً مثل «أرباح» أو «الفائدة»."}

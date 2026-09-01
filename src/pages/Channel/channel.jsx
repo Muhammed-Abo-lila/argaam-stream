@@ -8,6 +8,7 @@ import {
   getChannelByChannelId,
   getEpisodesByChannelId,
 } from "../../data/selectorFunctions";
+import NotFound from "../NotFound/NotFound";
 const Channel = () => {
   const { id } = useParams();
   const [activeSort, setActiveSort] = useState("newest");
@@ -44,6 +45,11 @@ const Channel = () => {
   const channelDetails = getChannelByChannelId(id);
 
   const lang = useLang("en", "ar");
+
+  if (!channelDetails) {
+    return <NotFound />;
+  }
+
   return (
     <>
       <div className="channel-heroSection">
