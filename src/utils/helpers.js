@@ -14,7 +14,6 @@ export const getEpisodeLabel = (count, lang) => {
   return "حلقة";
 };
 
-
 export const sliceText = (text, length) => {
   if (!text) return "";
 

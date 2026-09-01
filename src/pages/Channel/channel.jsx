@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom";
+import { Navigate, redirect, useParams } from "react-router-dom";
 import VideoCard from "../../components/common/VideoCard/VideoCard";
 import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
 import SortComp from "../../components/ui/SortComp/SortComp";
 import useLang from "../../utils/useLang";
 import { useState } from "react";
 import { getEpisodesByChannelId } from "../../data/selectorFunctions";
+import { channels } from "../../data/channelsData";
 const channel = () => {
-    const { slug } = useParams();
+    const { id } = useParams();
     const [activeSort, setActiveSort] = useState("newest")
-    const episodesByChannel = getEpisodesByChannelId(slug)
+    const episodesByChannel = getEpisodesByChannelId(id);
     const sortList = [
         {
             key: "newest",
@@ -38,7 +39,8 @@ const channel = () => {
                 return 0;
         }
     });
-
+    const isChannelIdValid = channels?.some((channel) => channel?.id === id);
+    if (!isChannelIdValid) { return (<Navigate to={`/${useLang("en", "ar")}/not-found`} replace />) }
     return (
         <div className="container-fluid px-5 mb-5">
             {/*section header */}

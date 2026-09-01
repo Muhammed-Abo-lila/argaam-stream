@@ -7,6 +7,7 @@ const VideoCard = ({ videoData }) => {
   const [imageQuality, setImageQuality] = useState("maxresdefault");
   // get channel data depend on channelId to set color and channel name
   const channel = getChannelByChannelId(videoData?.channelId);
+  const lang = useLang("en", "ar")
   return (
     <Link to={`/${useLang("en", "ar")}/watch/${videoData?.id}`} className="text-decoration-none h-100 d-block" data-color={channel?.key}>
       <div className="card video-channel-card video-card custom-fs-12 text-capitalize rounded-0 cursor-pointer h-100">
@@ -17,10 +18,12 @@ const VideoCard = ({ videoData }) => {
               <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2Z"></path></svg>
             </div>
           </div>
+
           <img
             className="card-img-top rounded-0"
             src={`https://i.ytimg.com/vi/${videoData?.youtubeId}/${imageQuality}.jpg`}
-            alt=""
+            alt={videoData.title[lang]}
+            loading="lazy"
             onLoad={(e) => {
               if (
                 imageQuality === "maxresdefault" &&

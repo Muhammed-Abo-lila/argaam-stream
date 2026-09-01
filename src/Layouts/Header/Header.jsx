@@ -96,7 +96,7 @@ const Header = () => {
             <Link className="logo" to={`/${lang}/home`}>
               <img
                 src={theme === "dark" ? dark_logo : light_logo}
-                alt="logo"
+                 alt={useLang("argaam company logo","شعار شركه أرقام")}
                 loading="lazy"
               />
               <span>{useLang("originals", "فيديو")}</span>
@@ -214,7 +214,7 @@ const Header = () => {
               {/* icons */}
               <div
                 className="icon"
-                onClick={() => changeLanguage(useLang("ar", "en"))}
+                onClick={() => changeLanguage(lang==="en"?"ar":"en")}
               >
                 <span>{useLang("ع", "EN")}</span>
               </div>
