@@ -7,14 +7,14 @@ const Footer = () => {
         <footer className=" custom-fs-14">
             <div className="top-footer" style={{ backgroundColor: "#262220" }}>
                 <div className="container-fluid">
-                    <div className="row py-5 px-5 row-gap-4" >
+                    <div className="row py-5 row-gap-4" >
 
                         <div className="col-6 col-md-4">
                             <img src={logoImg} style={{ height: "24px" }} alt={useLang("argaam company logo", "شعار شركه أرقام")} />
                             <p className="footer_secondary_color mt-2">{useLang("Argaam Originals — video programmes on the Saudi,Gulf, and international", "إنتاجات أرقام الأصلية — برامج مرئية عن السوق السعودي والخليجي والعالمي")}</p>
                         </div>
 
-                        <div className="col-6 col-md-2 text-capitalize m-0 p-0">
+                        <div className="col-6 col-md-2 text-capitalize m-0">
                             <h5 className="footer_main_color custom-fs-14">{useLang("channels", "البرامج")}</h5>
                             <ul className="list-unstyled p-0 m-0 d-flex flex-column gap-2 mt-3 footer_secondary_color">
                                 {channels?.map((channel, idx) =>
@@ -23,7 +23,7 @@ const Footer = () => {
                             </ul>
                         </div>
 
-                        <div className="col-6 col-md-2 text-capitalize m-0 p-0">
+                        <div className="col-6 col-md-2 text-capitalize m-0">
                             <h5 className="footer_main_color custom-fs-14">{useLang("products", "المنتجات")}</h5>
                             <ul className="list-unstyled p-0 m-0 d-flex flex-column gap-2 mt-3 footer_secondary_color">
                                 <li><Link to={`/${useLang("en", "ar")}/browse`} className="text-decoration-none text-reset">{useLang("browse all", "تصفح الكل")}</Link></li>
@@ -32,7 +32,7 @@ const Footer = () => {
                             </ul>
                         </div>
 
-                        <div className="col-6 col-md-2 text-capitalize m-0 p-0">
+                        <div className="col-6 col-md-2 text-capitalize m-0">
                             <h5 className="footer_main_color custom-fs-14">{useLang("legal", "قانوني")}</h5>
                             <ul className="list-unstyled p-0 m-0 d-flex flex-column gap-2 mt-3 footer_secondary_color">
                                 <li><Link to="#" className="text-decoration-none text-reset">{useLang("about argaam", "عن أرقام")}</Link></li>

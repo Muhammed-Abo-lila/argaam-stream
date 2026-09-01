@@ -4,7 +4,7 @@ import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
 import { channels } from "../../data/channelsData";
 const Channels = () => {
   return (
-    <div className="container-fluid px-5 mb-5 channels">
+    <div className="container-fluid my-5 channels">
       <div className="mb-3 text-capitalize">
         <h4 className="mb-2 theme_text_main custom-fs-24-30 fw-semibold">{useLang("channels", "البرامج")}</h4>
         <p className="custom-fs-16 theme_text_secondary">
