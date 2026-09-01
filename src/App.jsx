@@ -3,13 +3,12 @@ import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
-  useParams,
 } from "react-router-dom";
 import Layout from "./Layout";
 import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
-import Watch from "./pages/Watch/watch";
-import useLang from "./utils/useLang";
+import Watch from "./pages/Watch/Watch";
+
 const Home = lazy(() => import("./pages/Home/Home"));
 const Channels = lazy(() => import("./pages/Channels/Channels"));
 const Channel = lazy(() => import("./pages/Channel/channel"));
