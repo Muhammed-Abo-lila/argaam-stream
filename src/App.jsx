@@ -18,6 +18,7 @@ const MyList = lazy(() => import("./pages/MyList/MyList"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
+  
   const supportedLanguages = i18n.options.supportedLngs;
 
   const LanguageLayout = () => {
