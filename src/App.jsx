@@ -13,6 +13,7 @@ const Channel = lazy(() => import("./pages/Channel/Channel"));
 const BrowseAll = lazy(() => import("./pages/BrowseAll/BrowseAll"));
 const MyList = lazy(() => import("./pages/MyList/MyList"));
 const Search = lazy(() => import("./pages/Search/Search"));
+const Watch = lazy(() => import("./pages/Watch/Watch"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
   const supportedLanguages = i18n.options.supportedLngs;
@@ -63,6 +64,10 @@ function App() {
         {
           path: "not-found",
           element: <NotFound />,
+        },
+        {
+          path: "watch/:id",
+          element: <Watch />,
         },
         {
           path: "*",
