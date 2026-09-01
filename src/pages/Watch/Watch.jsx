@@ -8,6 +8,7 @@ import "./Watch.css";
 import { episodesData } from "../../data/episodesData";
 import useLang from "../../utils/useLang";
 import { useEffect, useState } from "react";
+import NotFound from "../NotFound/NotFound";
 
 const Watch = () => {
   const lang = useLang("en", "ar");
@@ -16,11 +17,15 @@ const Watch = () => {
 
   const { id } = useParams();
 
-  const episodeDetails = episodesData?.find((episode) => episode.id === id);
+  const episodeDetails = episodesData?.find((episode) => episode?.id === id);
 
-  const episodesByChannelId = getEpisodesByChannelId(episodeDetails.channelId);
+  if (!episodeDetails) {
+    return <NotFound />;
+  }
 
-  const channelDetails = getChannelByChannelId(episodeDetails.channelId);
+  const episodesByChannelId = getEpisodesByChannelId(episodeDetails?.channelId);
+
+  const channelDetails = getChannelByChannelId(episodeDetails?.channelId);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInMyList, setIsInMyList] = useState(false);
