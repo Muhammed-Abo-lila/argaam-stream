@@ -9,7 +9,7 @@ import {
   getEpisodesByChannelId,
 } from "../../data/selectorFunctions";
 const Channel = () => {
-  const { id } = useParams();  
+  const { id } = useParams();
   const [activeSort, setActiveSort] = useState("newest");
   const episodesByChannel = getEpisodesByChannelId(id);
   const sortList = [
@@ -42,8 +42,6 @@ const Channel = () => {
     }
   });
   const channelDetails = getChannelByChannelId(id);
-console.log("channelDetails===>",channelDetails);
-
   return (
     <>
 
@@ -150,6 +148,7 @@ console.log("channelDetails===>",channelDetails);
           )}
         </div>
       </div>
+      
     </>
   );
 };
