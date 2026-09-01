@@ -15,6 +15,8 @@ const Watch = () => {
 
   const episodesByChannelId = getEpisodesByChannelId(episodeDetails.channelId);
 
+  console.log(episodesByChannelId);
+
   return (
     <div className="watch-details">
       <div className="player">
