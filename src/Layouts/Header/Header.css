@@ -55,6 +55,14 @@
     border-radius: 15px;
 }
 
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        border-block-start: 1px solid #3f3a37;
+        padding-block-start: 10px;
+        margin-block-end: 0px;
+    }
+}
+
 @media (max-width: 575.98px) {
     .navbar .nav-links {
         overflow-x: auto;

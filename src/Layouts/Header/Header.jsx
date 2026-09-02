@@ -92,7 +92,7 @@ const Header = () => {
       <div className="container-fluid">
         <div className="row w-100 m-auto row-gap-3">
           {/* logo */}
-          <div className="col-sm-12 col-md-6 col-lg-2">
+          <div className="col-sm-12 col-md-6 col-lg-3 col-xxl-2">
             <Link className="logo" to={`/${lang}`}>
               <img
                 src={theme === "dark" ? dark_logo : light_logo}
@@ -103,7 +103,7 @@ const Header = () => {
             </Link>
           </div>
           {/* menu items */}
-          <div className="col-sm-12 col-md-6 col-lg-6 p-0 order-3 order-sm-0">
+          <div className="col-sm-12 col-md-12 col-lg-5 col-xxl-6 p-0 order-3 order-lg-0">
             <ul className="nav-links h-100">
               {menuItems.map((item, idx) => (
                 <li key={idx}>
@@ -115,7 +115,7 @@ const Header = () => {
             </ul>
           </div>
           {/* search + icons */}
-          <div className="col-sm-12 col-md-6 col-lg-4">
+          <div className="col-sm-12 col-md-6 col-lg-4 col-xxl-4">
             <div className="right-nav">
               <div className="search">
                 <span className="search-icon">

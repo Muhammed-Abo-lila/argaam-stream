@@ -46,7 +46,7 @@ const Footer = () => {
 
             <div className="bottom-footer" style={{ backgroundColor: "#000" }}>
                 <div className="container-fluid">
-                    <div className="d-flex flex-column justify-content-center align-items-center row-gap-3 flex-sm-row justify-content-sm-between w-full footer_secondary_color text-capitalize p-3 custom-fs-12">
+                    <div className="d-flex flex-column justify-content-center align-items-center row-gap-3 flex-sm-row justify-content-sm-between w-full footer_secondary_color text-capitalize py-3 custom-fs-12">
                         <p className="m-0">{useLang("all rights reserved, argaam investment company.", "جميع الحقوق محفوظة لشركة أرقام الإستثمارية.")}</p>
                         <p className="m-0">{useLang("content is informational and is not investment advice.", "المحتوى المعروض لأغراض إعلامية ولا يُعد توصية استثمارية.")}</p>
                     </div>
