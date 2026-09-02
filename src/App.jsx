@@ -17,17 +17,13 @@ const Watch = lazy(() => import("./pages/Watch/Watch"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 function App() {
   const supportedLanguages = i18n.options.supportedLngs;
-
   const LanguageLayout = () => {
     const { lang } = useParams();
-
     if (!supportedLanguages.includes(lang)) {
       return <Navigate to={`/${i18n.language}`} replace />;
     }
-
     return <Layout />;
   };
-
   const router = createBrowserRouter([
     {
       path: "/",

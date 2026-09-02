@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
-import VideoCard from "../../components/common/VideoCard/VideoCard";
-import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
-import SortComp from "../../components/ui/SortComp/SortComp";
+import VideoCard from "../../components/VideoCard/VideoCard";
+import EmptyComp from "../../components/EmptyComp/EmptyComp";
+import SortComp from "../../components/SortComp/SortComp";
 import useLang from "../../utils/useLang";
 import { useState } from "react";
 import {
@@ -9,6 +9,7 @@ import {
   getEpisodesByChannelId,
 } from "../../data/selectorFunctions";
 import NotFound from "../NotFound/NotFound";
+import SectionHead from "../../components/SectionHead/SectionHead";
 const Channel = () => {
   const { id } = useParams();
   const [activeSort, setActiveSort] = useState("newest");
@@ -128,18 +129,15 @@ const Channel = () => {
 
       <div className="container-fluid my-5">
         {/*section header */}
-        <div className="d-flex justify-content-between align-items-center flex-wrap row-gap-2">
-          {/* playlists Title */}
-          <h4 className="custom-fs-16 text-capitalize theme_text_secondary">
-            {useLang("all episodes", "كل الحلقات")}
-          </h4>
+        <SectionHead sectionTitle={useLang("all episodes", " كل الحلقات")}>
           {/* videos sort */}
           <SortComp
             sortList={sortList}
             activeSort={activeSort}
             setActiveSort={setActiveSort}
           />
-        </div>
+        </SectionHead>
+
         {/* section episode */}
         <div className="row mx-0">
           {sortedEpisodes?.length > 0 ? (

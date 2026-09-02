@@ -2,18 +2,21 @@ import { Link } from "react-router-dom"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import { Navigation } from 'swiper/modules';
-import useLang from "../../../utils/useLang";
-const HomeSliderComp = ({ sectionTitle, linkLabel, link,linkState, data, renderItem }) => {
+import useLang from "../../utils/useLang";
+import SectionHead from "../SectionHead/SectionHead";
+const HomeSliderComp = ({ sectionTitle, linkLabel, link, linkState, data, renderItem }) => {
     return (
         <div>
             {/*section header */}
-            <div className="d-flex justify-content-between align-items-center mb-2 text-capitalize">
-                <h4 className="custom-fs-18 theme_text_secondary fw-bold">{sectionTitle}</h4>
-                <Link to={link} state={linkState} className="custom-fs-14 fw-bolder text-decoration-none theme_text_identity d-flex gap-1">
-                    {linkLabel}
-                    <i className={`bi ${useLang("bi-chevron-right", "bi-chevron-left")}`} />
-                </Link>
-            </div>
+            <SectionHead sectionTitle={sectionTitle}>
+                {linkLabel &&
+                    <Link to={link} state={linkState} className="custom-fs-14 fw-bolder text-decoration-none theme_text_identity d-flex gap-1">
+                        {linkLabel}
+                        <i className={`bi ${useLang("bi-chevron-right", "bi-chevron-left")}`} />
+                    </Link>
+                }
+            </SectionHead>
+
             {/* section swiper videos */}
             <Swiper
                 key={useLang("ltr", "rtl")}

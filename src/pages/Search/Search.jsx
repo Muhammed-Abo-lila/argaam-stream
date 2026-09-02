@@ -3,15 +3,16 @@ import useLang from "../../utils/useLang";
 import { useMemo } from "react";
 import { episodesData } from "../../data/episodesData";
 import { channels } from "../../data/channelsData";
-import ChannelCard from "../../components/common/ChannelCard/ChannelCard";
-import VideoCard from "../../components/common/VideoCard/VideoCard";
+import ChannelCard from "../../components/ChannelCard/ChannelCard";
+import VideoCard from "../../components/VideoCard/VideoCard";
+import PagesHeader from "../../components/PagesHeader/PagesHeader";
+import EmptyComp from "../../components/EmptyComp/EmptyComp";
 
 const Search = () => {
   const lang = useLang("en", "ar");
   const [searchParams] = useSearchParams();
   // get search value
   const searchTerm = searchParams.get("q") || "";
-
   // search results data using useMemo to prevent filtering in every render
   const searchResults = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
@@ -45,11 +46,9 @@ const Search = () => {
 
   return (
     <div className="container-fluid theme_text_main py-5">
-      <h2 className="fw-bold custom-fs-24-30 mb-3">
-        {useLang("Search results", "نتائج البحث")}
-      </h2>
+      <PagesHeader pageTitle={useLang("search results", "نتائج البحث")} />
       {searchResults.channels.length > 0 ||
-      searchResults.episodes.length > 0 ? (
+        searchResults.episodes.length > 0 ? (
         <p className="custom-fs-16 fw-bold theme_text_secondary mb-4">
           "{searchTerm}" .{" "}
           {searchResults.channels.length + searchResults.episodes.length}
@@ -89,22 +88,14 @@ const Search = () => {
 
       {searchResults.channels.length === 0 &&
         searchResults.episodes.length === 0 && (
-          <div
-            className="d-flex flex-column justify-center align-items-center border mt-5"
-            style={{
-              paddingBlock: "100px",
-              marginBlockEnd:"50px"
-            }}
-          >
-            <h4 className="custom-fs-18 fw-bold mb-3">
-              {lang === "en" ? "No matching results" : "لا توجد نتائج مطابقة"}
-            </h4>
-            <p className="custom-fs-14 theme_text_secondary text-center">
-              {lang === "en"
-                ? "Try a channel name or a topic such as “earnings” or “rates”."
-                : "جرّب اسم قناة أو موضوعاً مثل «أرباح» أو «الفائدة»."}
-            </p>
-          </div>
+          <>
+            <EmptyComp
+              titleEn="no matching results"
+              titleAr="لا توجد نتائج مطابقة"
+              subTitleEn="try a channel name or a topic such as “earnings” or “rates”."
+              subTitleAr="جرّب اسم قناة أو موضوعاً مثل «أرباح» أو «الفائدة»."
+            />
+          </>
         )}
     </div>
   );

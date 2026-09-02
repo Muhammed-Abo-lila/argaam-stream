@@ -9,6 +9,7 @@ import { episodesData } from "../../data/episodesData";
 import useLang from "../../utils/useLang";
 import { useEffect, useState } from "react";
 import NotFound from "../NotFound/NotFound";
+import Player from "../../components/Player/Player";
 
 const Watch = () => {
   const [imageQualities, setImageQualities] = useState({});
@@ -19,6 +20,7 @@ const Watch = () => {
 
   const episodeDetails = episodesData?.find((episode) => episode?.id === id);
 
+  console.log("episodeDetails===>", episodeDetails?.durationMin);
 
 
   const episodesByChannelId = getEpisodesByChannelId(episodeDetails?.channelId);
@@ -71,11 +73,6 @@ const Watch = () => {
   }, [episodeDetails?.id]);
 
 
-
-
-
-
-
   const getQuality = (episodeId) => imageQualities[episodeId] || "maxresdefault";
 
   const handleQualityFallback = (episodeId, currentQuality, naturalWidth, fallback = "sddefault") => {
@@ -87,7 +84,16 @@ const Watch = () => {
   const mainQuality = getQuality(episodeDetails?.id);
 
 
+  const storedEpisodes = JSON.parse(
+    localStorage.getItem("videoProgress") || "{}"
+  );
 
+  const episodeProgress = storedEpisodes[episodeDetails.id];
+
+  const startSeconds =
+    episodeProgress && episodeProgress.fraction < 1
+      ? episodeProgress.currentTime
+      : 0;
 
   if (!episodeDetails) {
     return <NotFound />;
@@ -129,22 +135,22 @@ const Watch = () => {
             </div>
           </>
         ) : (
-          <iframe
-            className="video-iframe"
-            src={`https://www.youtube.com/embed/${episodeDetails.youtubeId}?autoplay=1`}
-            title={
-              lang === "en" ? episodeDetails.title.en : episodeDetails.title.ar
-            }
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
-          />
+          <div style={{ width: "70%"}}>
+            <Player
+              episodeId={episodeDetails.id}
+              videoId={episodeDetails.youtubeId}
+              title={lang === "en" ? episodeDetails.title.en : episodeDetails.title.ar}
+              lang={lang}
+              startSeconds={startSeconds}
+            />
+          </div>
         )}
       </div>
 
       <div className="container-fluid">
         <div className="watch-wrap mb-5">
           <div className="row w-100 mx-auto">
-            <div className="col-12 col-md-7 col-lg-9 py-5 border theme_border_color">
+            <div className="col-12 col-md-7 col-lg-9 py-5 border theme_border_color border-top-0">
               <div className="video-meta mb-3">
                 <span
                   style={{
@@ -298,7 +304,7 @@ const Watch = () => {
             </div>
 
             {/* side episodes */}
-            <div className="col-12 col-md-5 col-lg-3 p-0 border theme_border_color">
+            <div className="col-12 col-md-5 col-lg-3 p-0 border theme_border_color  border-top-0">
               <aside className="watch-videos">
                 <h2>
                   {useLang(

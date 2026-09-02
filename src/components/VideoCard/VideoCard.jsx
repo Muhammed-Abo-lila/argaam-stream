@@ -1,10 +1,11 @@
 import "./VideoCard.css"
-import useLang from '../../../utils/useLang'
+import useLang from '../../utils/useLang'
 import { Link } from "react-router-dom";
-import { getChannelByChannelId } from "../../../data/selectorFunctions";
+import { getChannelByChannelId } from "../../data/selectorFunctions";
 import { useState } from "react";
-import { formatViews } from "../../../utils/helpers";
+import { formatViews } from "../../utils/helpers";
 const VideoCard = ({ videoData }) => {
+  const storedEpisodes = JSON.parse(localStorage.getItem("videoProgress") || "{}");
   const [imageQuality, setImageQuality] = useState("maxresdefault");
   // get channel data depend on channelId to set color and channel name
   const channel = getChannelByChannelId(videoData?.channelId);
@@ -12,14 +13,14 @@ const VideoCard = ({ videoData }) => {
   return (
     <Link to={`/${useLang("en", "ar")}/watch/${videoData?.id}`} className="text-decoration-none h-100 d-block" data-color={channel?.key}>
       <div className="card video-channel-card video-card custom-fs-12 text-capitalize rounded-0 cursor-pointer h-100">
-        {/* video card image cover */}
+        {/* video image cover */}
         <div className="video-cover position-relative" style={{ aspectRatio: "16 / 9" }}>
           <div className="video-play-icon position-absolute top-0 bottom-0 start-0 end-0 z-1 d-flex justify-content-center align-items-center">
             <div className="theme_bg_identity p-2 rounded-circle">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2Z"></path></svg>
             </div>
           </div>
-          <div className="position-absolute bottom-0 end-0 bg-black opacity-75 text-white px-2 py-1 m-2 rounded-pill">{videoData?.durationMin} {useLang("min","دقيقه")}</div>
+          <div className="position-absolute bottom-0 end-0 bg-black opacity-75 text-white px-2 py-1 m-2 rounded-pill">{videoData?.durationMin} {useLang("min", "دقيقه")}</div>
           <img
             className="card-img-top rounded-0"
             src={`https://i.ytimg.com/vi/${videoData?.youtubeId}/${imageQuality}.jpg`}
@@ -39,6 +40,7 @@ const VideoCard = ({ videoData }) => {
               }
             }}
           />
+          <div className="progress-line" style={{ width: `${(storedEpisodes[videoData?.id]?.fraction ?? 0) * 100}%` }} data-color={channel?.key} />
         </div>
         {/* video card content */}
         <div className="card-body d-flex flex-column gap-2">

@@ -1,18 +1,32 @@
-import VideoCard from "../../components/common/VideoCard/VideoCard";
 import useLang from "../../utils/useLang";
-import HomeSliderComp from "../../components/ui/HomeSliderComp/HomeSliderComp";
-import ChannelCard from "../../components/common/ChannelCard/ChannelCard";
+import HomeSliderComp from "../../components/HomeSliderComp/HomeSliderComp";
+import ChannelCard from "../../components/ChannelCard/ChannelCard";
+import VideoCard from "../../components/VideoCard/VideoCard";
 import { channels } from "../../data/channelsData";
 import { getEpisodesByChannelId, getEpisodesSortedByViews, getLatestEpisodes } from "../../data/selectorFunctions";
-import HeroSection from "../../components/ui/HeroSection/HeroSection";
+import HeroSection from "../../components/HeroSection/HeroSection";
+import { episodesData } from "../../data/episodesData";
 const Home = () => {
   const episodesSortedByViews = getEpisodesSortedByViews();
   const latestEpisodes = getLatestEpisodes();
+  const storedEpisodes = JSON.parse(localStorage.getItem("videoProgress") || "{}");
+  const continueWatchEpisodesList = episodesData.filter((episode) => storedEpisodes[episode.id])
   return (
     <>
       <HeroSection />
       <div className="container-fluid pb-5 mb-5">
         <div className="d-flex flex-column gap-5">
+
+
+          {continueWatchEpisodesList?.length > 0 &&
+            <HomeSliderComp
+              sectionTitle={useLang("continue watching", "أكمل المشاهدة")}
+              data={continueWatchEpisodesList}
+              renderItem={(video) => (
+                <VideoCard videoData={video} />
+              )}
+            />
+          }
 
           <HomeSliderComp
             sectionTitle={useLang("argaam originals", "إنتاجات أرقام الأصلية")}

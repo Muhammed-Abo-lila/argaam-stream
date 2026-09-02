@@ -1,18 +1,20 @@
 import { useState } from "react";
-import VideoCard from "../../components/common/VideoCard/VideoCard";
+import VideoCard from "../../components/VideoCard/VideoCard";
 import useLang from "../../utils/useLang";
-import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
-import SortComp from "../../components/ui/SortComp/SortComp";
+import EmptyComp from "../../components/EmptyComp/EmptyComp";
+import SortComp from "../../components/SortComp/SortComp";
 import { getEpisodesByChannelId } from "../../data/selectorFunctions";
 import { channels } from "../../data/channelsData";
 import { episodesData } from "../../data/episodesData";
 import { getEpisodeLabel } from "../../utils/helpers";
 import { useLocation } from "react-router-dom";
+import SectionHead from "../../components/SectionHead/SectionHead";
+import PagesHeader from "../../components/PagesHeader/PagesHeader";
 const BrowseAll = () => {
   const location = useLocation();
   const lang = useLang("en", "ar")
   const [activeChannelId, setActiveChannelId] = useState("all")
-  const [activeSort, setActiveSort] = useState(location?.state||"newest")
+  const [activeSort, setActiveSort] = useState(location?.state || "newest")
   const [filteredEpisodes, setFilteredEpisodes] = useState(episodesData);
 
   const handleSelectChannelAndFilterEpisodes = (channelId) => {
@@ -39,10 +41,8 @@ const BrowseAll = () => {
     switch (activeSort) {
       case "newest":
         return new Date(b.publishedAt) - new Date(a.publishedAt);
-
       case "mostWatched":
         return b.views - a.views;
-
       default:
         return 0;
     }
@@ -51,16 +51,11 @@ const BrowseAll = () => {
   return (
     <div className="container-fluid my-5 browse-all">
       {/* page heder */}
-      <div className="mb-3 text-capitalize">
-        <h4 className="mb-2 theme_text_main custom-fs-24-30 fw-semibold">{useLang("browse all", "تصفح الكل")}</h4>
+      <PagesHeader
+        pageTitle={useLang("browse all", "تصفح الكل")}
+        pageSubtitle={`${sortedEpisodes?.length} ${getEpisodeLabel(sortedEpisodes?.length, lang)} . ${channels?.length} ${useLang("channels", "قنوات")}`}
+      />
 
-        <div className="d-flex align-items-center gap-2 theme_text_secondary custom-fs-16">
-          <p className="m-0 p-0">{sortedEpisodes?.length} {getEpisodeLabel(sortedEpisodes?.length, lang)}</p>
-          <p className="m-0 p-0">.</p>
-          <p className="m-0 p-0">{channels?.length} {useLang("channels", "قنوات")}</p>
-        </div>
-
-      </div>
       {/* channels filter and episodes sort */}
       <div className="playlists-filter d-flex justify-content-between align-items-center flex-wrap row-gap-2 my-3">
         {/* channels filter */}

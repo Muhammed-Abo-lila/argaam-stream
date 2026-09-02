@@ -25,3 +25,11 @@
 [dir="ltr"] .video-card .channel-title::before {
   left: -7px;
 }
+
+.video-card .progress-line{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: var(--channel_color);
+}

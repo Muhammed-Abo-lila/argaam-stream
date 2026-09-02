@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import useLang from "../../../utils/useLang";
-import { getEpisodesByChannelId } from "../../../data/selectorFunctions";
-import { getEpisodeLabel, sliceText } from "../../../utils/helpers";
+import useLang from "../../utils/useLang";
+import { getEpisodesByChannelId } from "../../data/selectorFunctions";
+import { getEpisodeLabel, sliceText } from "../../utils/helpers";
 import "./ChannelCard.css"
 const ChannelCard = ({ channel }) => {
     // get episodes depend on channelId

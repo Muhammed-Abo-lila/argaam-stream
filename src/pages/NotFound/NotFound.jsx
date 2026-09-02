@@ -1,4 +1,4 @@
-import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
+import EmptyComp from "../../components/EmptyComp/EmptyComp";
 
 const NotFound = () => {
   return (

@@ -1,8 +1,10 @@
-import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
-import VideoCard from "../../components/common/VideoCard/VideoCard";
+import EmptyComp from "../../components/EmptyComp/EmptyComp";
+import VideoCard from "../../components/VideoCard/VideoCard";
 import useLang from "../../utils/useLang";
 import { episodesData } from "../../data/episodesData";
 import { getEpisodeLabel } from "../../utils/helpers";
+import SectionHead from "../../components/SectionHead/SectionHead";
+import PagesHeader from "../../components/PagesHeader/PagesHeader";
 const MyList = () => {
   const lang = useLang("en", "ar");
 
@@ -15,17 +17,11 @@ const MyList = () => {
   );
   return (
     <div className="container-fluid my-5 browse-all">
-      {/* page heder */}
-      <div className=" mb-3 text-capitalize">
-        <h4 className="mb-2 theme_text_main custom-fs-24-30 fw-semibold">
-          {useLang("my list", "قائمتي")}
-        </h4>
-        <p className="m-0 theme_text_secondary custom-fs-16">
-          {myListEpisodes?.length}{" "}
-          {getEpisodeLabel(myListEpisodes?.length, lang)}
-        </p>
-      </div>
-
+      {/* page header */}
+      <PagesHeader
+        pageTitle={useLang("my list", "قائمتي")}
+        pageSubtitle={`${myListEpisodes?.length} ${getEpisodeLabel(myListEpisodes?.length, lang)}`}
+      />
       {/* videos */}
       <div className="row mx-0">
         {myListEpisodes?.length > 0 ? (

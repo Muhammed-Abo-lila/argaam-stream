@@ -1,11 +1,11 @@
 import "./HeroSection.css";
-import useLang from "../../../utils/useLang";
+import useLang from "../../utils/useLang";
 import { Link } from "react-router-dom";
 import {
   getChannelByChannelId,
   getEpisodesByChannelId,
-} from "../../../data/selectorFunctions";
-import { formatDate, formatViews } from "../../../utils/helpers";
+} from "../../data/selectorFunctions";
+import { formatDate, formatViews } from "../../utils/helpers";
 import { useEffect, useState } from "react";
 
 const HeroSection = () => {

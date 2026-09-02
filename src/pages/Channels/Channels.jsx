@@ -1,19 +1,18 @@
 import useLang from "../../utils/useLang";
-import ChannelCard from "../../components/common/ChannelCard/ChannelCard";
-import EmptyComp from "../../components/ui/EmptyComp/EmptyComp";
+import ChannelCard from "../../components/ChannelCard/ChannelCard";
+import EmptyComp from "../../components/EmptyComp/EmptyComp";
 import { channels } from "../../data/channelsData";
+import SectionHead from "../../components/SectionHead/SectionHead";
+import PagesHeader from "../../components/PagesHeader/PagesHeader";
 const Channels = () => {
   return (
     <div className="container-fluid my-5 channels">
-      <div className="mb-3 text-capitalize">
-        <h4 className="mb-2 theme_text_main custom-fs-24-30 fw-semibold">{useLang("channels", "البرامج")}</h4>
-        <p className="custom-fs-16 theme_text_secondary">
-          {useLang(
-            "argaam originals — video programmes covering saudi, gulf, and international markets.",
-            "إنتاجات أرقام الأصلية — محتوى مرئي عن السوق السعودي والخليجي والعالمي.",
-          )}
-        </p>
-      </div>
+      <PagesHeader
+        pageTitle={useLang("channels", "البرامج")}
+        pageSubtitle={useLang(
+          "argaam originals — video programmes covering saudi, gulf, and international markets.",
+          "إنتاجات أرقام الأصلية — محتوى مرئي عن السوق السعودي والخليجي والعالمي.",
+        )} />
       <div className="row mx-0">
         {channels && channels?.length > 0 ? (
           channels.map((channel, idx) => (
