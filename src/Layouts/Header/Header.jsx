@@ -88,26 +88,35 @@ const Header = () => {
   }, [searchTerm]);
 
   return (
-    <header className="navbar py-3">
+    <header className="navbar theme_bg_main py-3">
       <div className="container-fluid">
         <div className="row w-100 m-auto row-gap-3">
           {/* logo */}
           <div className="col-sm-12 col-md-6 col-lg-3 col-xxl-2">
-            <Link className="logo" to={`/${lang}`}>
+            <Link
+              className="logo text-decoration-none d-flex align-items-baseline gap-2"
+              to={`/${lang}`}
+            >
               <img
                 src={theme === "dark" ? dark_logo : light_logo}
                 alt={useLang("argaam company logo", "شعار شركه أرقام")}
                 loading="lazy"
               />
-              <span>{useLang("originals", "فيديو")}</span>
+              <span className="d-inline-block ps-2 theme_text_identity custom-fs-16 fw-regular">
+                {useLang("originals", "فيديو")}
+              </span>
             </Link>
           </div>
           {/* menu items */}
           <div className="col-sm-12 col-md-12 col-lg-5 col-xxl-6 p-0 order-3 order-lg-0">
-            <ul className="nav-links h-100">
+            <ul className="nav-links h-100 p-0 d-flex align-items-center justify-content-start">
               {menuItems.map((item, idx) => (
-                <li key={idx}>
-                  <NavLink to={item.path} end>
+                <li className="list-unstyled pe-2" key={idx}>
+                  <NavLink
+                    className="custom-fs-14 theme_text_main text-decoration-none py-1 px-2"
+                    to={item.path}
+                    end
+                  >
                     {item.name}
                   </NavLink>
                 </li>
@@ -116,9 +125,9 @@ const Header = () => {
           </div>
           {/* search + icons */}
           <div className="col-sm-12 col-md-6 col-lg-4 col-xxl-4">
-            <div className="right-nav">
-              <div className="search">
-                <span className="search-icon">
+            <div className="right-nav d-flex align-items-center justify-content-end gap-2">
+              <div className="search position-relative">
+                <span className="search-icon position-absolute theme_text_secondary d-flex top-50 translate-middle-y ps-2">
                   <svg
                     width="16"
                     height="16"
@@ -135,7 +144,7 @@ const Header = () => {
                   </svg>
                 </span>
                 <input
-                  className="search-input"
+                  className="search-input w-100 py-2 rounded-3 theme_bg_secondary theme_text_secondary border custom-fs-14"
                   placeholder={useLang(
                     "Search episodes and channels",
                     "ابحث عن حلقة أو قناه",
@@ -150,11 +159,11 @@ const Header = () => {
                 />
                 {/* search dropdown */}
                 {searchTerm.trim() && (
-                  <div className="search-dropdown">
+                  <div className="search-dropdown position-absolute w-100 h-auto theme_bg_main rounded-3 mt-3 ">
                     {searchResults.channels.length === 0 &&
                       searchResults.episodes.length === 0 && (
-                        <div className="not-found-data">
-                          <p className="">
+                        <div className="px-3 d-flex align-items-center justify-content-center not-found-data">
+                          <p className="custom-fs-14 theme_text_identity mb-0 fw-bold py-5">
                             {lang === "en"
                               ? "No Results Found"
                               : "لا توجد نتائج"}
@@ -167,13 +176,17 @@ const Header = () => {
                         <Link
                           to={`/${lang}/channel/${channel.id}`}
                           onClick={() => setSearchTerm("")}
-                          className="result-card"
+                          className="result-card d-flex align-items-start gap-2 mb-2 p-2 text-decoration-none"
                           key={channel.id}
                         >
                           <img src={channel.cover} alt={channel.name[lang]} />
                           <div className="d-flex flex-column justify-content-between">
-                            <h3>{channel.name[lang].slice(0, 25)}</h3>
-                            <p>{channel.description[lang].slice(0, 25)}</p>
+                            <h3 className="mb-2 custom-fs-14 theme_text_main">
+                              {channel.name[lang].slice(0, 25)}
+                            </h3>
+                            <p className="mb-0 custom-fs-12 theme_text_secondary">
+                              {channel.description[lang].slice(0, 25)}
+                            </p>
                           </div>
                         </Link>
                       ))}
@@ -183,7 +196,7 @@ const Header = () => {
                         <Link
                           to={`/${lang}/watch/${episode.id}`}
                           onClick={() => setSearchTerm("")}
-                          className="result-card"
+                          className="result-card d-flex align-items-start gap-2 mb-2 p-2 text-decoration-none"
                           key={episode.id}
                         >
                           <img
@@ -191,35 +204,40 @@ const Header = () => {
                             alt={episode.title[lang]}
                           />
                           <div className="d-flex flex-column justify-content-between">
-                            <h3>{episode.title[lang].slice(0, 25)}</h3>
-                            <p>{episode.synopsis[lang].slice(0, 25)}</p>
+                            <h3 className="mb-2 custom-fs-14 theme_text_main">
+                              {episode.title[lang].slice(0, 25)}
+                            </h3>
+                            <p className="mb-0 custom-fs-12 theme_text_secondary">
+                              {episode.synopsis[lang].slice(0, 25)}
+                            </p>
                           </div>
                         </Link>
                       ))}
 
                     {(searchResults.channels.length > 0 ||
                       searchResults.episodes.length > 0) && (
-                        <div className="search-dropdown-actions">
-                          <Link
-                            to={`/${lang}/search?q=${encodeURIComponent(searchTerm.trim())}`}
-                            onClick={() => setSearchTerm("")}
-                          >
-                            {lang === "en" ? "View all" : "عرض الكل"}
-                          </Link>
-                        </div>
-                      )}
+                      <div className="search-dropdown-actions text-center">
+                        <Link
+                          className="d-block theme_text_identity custom-fs-18 fw-bold mt-1 mb-2"
+                          to={`/${lang}/search?q=${encodeURIComponent(searchTerm.trim())}`}
+                          onClick={() => setSearchTerm("")}
+                        >
+                          {lang === "en" ? "View all" : "عرض الكل"}
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
               {/* icons */}
               <div
-                className="icon"
+                className="icon d-flex align-items-center justify-content-center rounded-circle custom-font-16 fw-regular theme_text_secondary"
                 onClick={() => changeLanguage(lang === "en" ? "ar" : "en")}
               >
-                <span>{useLang("ع", "EN")}</span>
+                <span className="theme_text_main">{useLang("ع", "EN")}</span>
               </div>
               <div
-                className="icon border-0"
+                className="icon d-flex align-items-center justify-content-center rounded-circle custom-font-16 fw-regular theme_text_secondary border-0"
                 onClick={() => toggleTheme(!theme)}
               >
                 {theme === "dark" ? (

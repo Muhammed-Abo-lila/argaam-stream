@@ -8,24 +8,26 @@ import { channels } from "../../data/channelsData";
 import { episodesData } from "../../data/episodesData";
 import { getEpisodeLabel } from "../../utils/helpers";
 import { useLocation } from "react-router-dom";
-import SectionHead from "../../components/SectionHead/SectionHead";
 import PagesHeader from "../../components/PagesHeader/PagesHeader";
 const BrowseAll = () => {
   const location = useLocation();
-  const lang = useLang("en", "ar")
-  const [activeChannelId, setActiveChannelId] = useState("all")
-  const [activeSort, setActiveSort] = useState(location?.state || "newest")
+  const lang = useLang("en", "ar");
+  const [activeChannelId, setActiveChannelId] = useState("all");
+  console.log(activeChannelId);
+
+  const [activeSort, setActiveSort] = useState(location?.state || "newest");
   const [filteredEpisodes, setFilteredEpisodes] = useState(episodesData);
 
   const handleSelectChannelAndFilterEpisodes = (channelId) => {
-    setActiveChannelId(channelId)
+    setActiveChannelId(channelId);
     if (channelId === "all") {
       setFilteredEpisodes(episodesData);
       return;
     }
     const episodesByChannel = getEpisodesByChannelId(channelId);
-    setFilteredEpisodes(episodesByChannel)
-  }
+    setFilteredEpisodes(episodesByChannel);
+  };
+
   const sortList = [
     {
       key: "newest",
@@ -65,35 +67,64 @@ const BrowseAll = () => {
             style={{ borderColor: "var(--text_secondary)" }}
             onClick={() => handleSelectChannelAndFilterEpisodes("all")}
           >
-            <p className="m-0">
-              {useLang("all", "الكل")}
-            </p>
+            {activeChannelId === "all" && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            )}
+            <p className="mx-1 mb-0">{useLang("all", "الكل")}</p>
           </li>
-          {channels?.map((channel, idx) =>
+          {channels?.map((channel, idx) => (
             <li
               key={idx}
               className={`custom-fs-12 text-capitalize theme_text_secondary border rounded-5 px-3 py-1 cursor-pointer theme_bg_secondary d-flex justify-content-center align-items-center fw-bold ${activeChannelId === channel?.id ? "active-playlist" : ""}`}
               style={{ borderColor: "var(--text_secondary)" }}
               onClick={() => handleSelectChannelAndFilterEpisodes(channel?.id)}
             >
-              <p className="m-0">
+              {activeChannelId === channel?.id && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              )}
+              <p className="mx-1 mb-0">
                 {useLang(channel?.name?.en, channel?.name?.ar)}
               </p>
             </li>
-          )}
+          ))}
         </ul>
         {/* episodes sort */}
-        <SortComp sortList={sortList} activeSort={activeSort} setActiveSort={setActiveSort} />
+        <SortComp
+          sortList={sortList}
+          activeSort={activeSort}
+          setActiveSort={setActiveSort}
+        />
       </div>
 
       {/* episodes */}
       <div className="row mx-0">
         {sortedEpisodes?.length > 0 ? (
           sortedEpisodes.map((episode, idx) => (
-            <div
-              key={idx}
-              className="col-12 col-sm-6 col-lg-4 col-xl-3 p-0"
-            >
+            <div key={idx} className="col-12 col-sm-6 col-lg-4 col-xl-3 p-0">
               <VideoCard videoData={episode} />
             </div>
           ))
@@ -109,7 +140,6 @@ const BrowseAll = () => {
           />
         )}
       </div>
-
     </div>
   );
 };
