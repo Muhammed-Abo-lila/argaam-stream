@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <HeroSection />
-      <div className="container-fluid pb-5 mb-5">
+      <div className="container pb-5 mb-5">
         <div className="d-flex flex-column gap-5">
 
 

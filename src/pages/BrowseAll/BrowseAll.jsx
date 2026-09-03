@@ -51,7 +51,7 @@ const BrowseAll = () => {
   });
 
   return (
-    <div className="container-fluid my-5 browse-all">
+    <div className="container my-5 browse-all">
       {/* page heder */}
       <PagesHeader
         pageTitle={useLang("browse all", "تصفح الكل")}

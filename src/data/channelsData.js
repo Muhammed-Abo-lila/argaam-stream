@@ -26,9 +26,9 @@ export const channels = [
     },
 
     description: {
-      ar: "بودكاست مصوّر يلتقط في كل حلقة فكرة اقتصادية واحدة ويفكّكها في خمس إلى ثلاث عشرة دقيقة بسرد مكتوب بعناية، امتداداً بصرياً لنشرة ويك إند. تنقّلت الحلقات بين انسحاب «ويز إير» من سماء الشرق الأوسط، وانتقال حقوق فيديو الدوري السعودي من MBC إلى SRMG، و«وهم الجودة» في تقييم شركات الألعاب.",
+      ar: "مقالات فيديو سردية تتناول في كل حلقة فكرة اقتصادية واحدة، وتشرحها وتفكك أبعادها خلال 5 إلى 13 دقيقة. تأتي كنسخة مرئية مرافقة لنشرة «ويك إند»، وتطرح موضوعات متنوعة، من انسحاب «ويز إير» من الشرق الأوسط إلى انتقال حقوق بث الدوري السعودي من MBC إلى SRMG، وغيرها.",
 
-      en: "A narrated video essay that takes a single economic idea per episode and unpacks it in five to thirteen minutes — the on-screen companion to the Weekend newsletter. Topics have run from Wizz Air’s retreat from the Middle East to the Saudi Pro League broadcast rights moving from MBC to SRMG, and “the illusion of quality” in valuing gaming companies.",
+      en: "A narrated video essay that explores a single economic idea in each episode, unpacking it in five to thirteen minutes. It serves as the on-screen companion to the Weekend newsletter. Topics have ranged from Wizz Air’s retreat from the Middle East to the Saudi Pro League’s broadcast rights moving from MBC to SRMG, and more.",
     },
 
     cadence: {
@@ -48,7 +48,7 @@ export const channels = [
     slug: "1-plus-1",
     key: "gold",
     playlistId: "PLX7R7ZsqZGqhB46yp2KrP32-eXmWi_Mkm",
-    cover:onePlusOneCover,
+    cover: onePlusOneCover,
     status: "live",
     launchedAt: "2026-04-10",
 
@@ -63,9 +63,9 @@ export const channels = [
     },
 
     description: {
-      ar: "يأخذ صفقتي اندماج أو استحواذ في القطاع نفسه ويضعهما وجهاً لوجه ليجيب عن سؤال واحد: هل 1+1 تساوي 2 فعلاً، أم 3 أو 11 أو صفراً؟ الحلقات تفكّك الأرقام والإفصاحات — من فايف جايز وملك الطاووق إلى بن داود والمنجم وأديس وأدنوك للحفر — وتُختم كل حلقة بـ«الزبدة» و«مصطلح الحلقة».",
+      ar: "نأخذ صفقتي اندماج أو استحواذ في القطاع نفسه ونضعهما وجهًا لوجه لنجيب عن سؤال واحد: هل 1+1 تساوي 2 فعلاً، أم 3 أو 11 أو صفرًا؟ الحلقات تحلل الصفقة بالأرقام لقياس مدى جدواها والفائدة المحققة منها، وتحديد من المستفيد الأكبر من الاستحواذ، من خلال مقارنة أداء وقيمة الشركات قبل الصفقة وبعدها، وتبسيط أثرها على الشركات والمستثمرين والسوق.",
 
-      en: "Two M&A deals from the same sector, put head to head to answer one question: does 1+1 really equal 2 — or 3, or 11, or zero? Each episode works through the filings and the numbers behind matchups like Five Guys vs Malak Al Tawouk, BinDawood vs Almunajem and ADES vs ADNOC Drilling, then closes with a bottom-line wrap and a “term of the episode”.",
+      en: "We take two merger or acquisition deals in the same sector and put them head-to-head to answer one question: Does 1+1 really equal 2, or could it equal 3, 11, or zero? Each episode analyzes the deal through the numbers to assess its value and the benefits it delivers, determine who gained the most from the acquisition, and compare the companies’ performance and value before and after the deal. The goal is to simplify the impact of these transactions on companies, investors, and the market.",
     },
 
     cadence: {
@@ -100,9 +100,9 @@ export const channels = [
     },
 
     description: {
-      ar: "بودكاست حواري مطوّل باللغة الإنجليزية يستضيف كل أسبوع رؤساء تنفيذيين ومستثمرين وصنّاع قرار في حلقات تتراوح بين 41 و63 دقيقة حول التحول الاقتصادي في السعودية. استضاف حتى الآن عبدالعزيز العمران عن مرحلة ما بعد الطرح العام، وبراين وارد من «سافي للألعاب»، وإيزي سفير من بنك D360 الرقمي، ومايكل مولر عن بناء قطاع السيارات.",
+      ar: "برنامج حواري اقتصادي باللغة الإنجليزية يستضيف قادة الأعمال والرؤساء التنفيذيين وصنّاع القرار، لمناقشة تجاربهم ورؤيتهم حول الأسواق والقطاعات المختلفة، واستكشاف الفرص الاستثمارية والتحولات الاقتصادية في المملكة، مع تسليط الضوء على النمو والتطورات المرتبطة بـ رؤية السعودية 2030 ومخاطبة المستثمر المحلي والدولي.",
 
-      en: "Argaam’s English-language, long-form business podcast, where CEOs, fund managers and policymakers sit down for 41-to-63-minute conversations on Saudi Arabia’s economic transformation. Guests so far include Impact46’s Abdulaziz Alomran on life beyond the IPO, Savvy Games Group’s Brian Ward, D360’s Eze Szafir on digital banking, and TASARU’s Michael Müller on the new automotive supply chain.",
+      en: "An English-language business and economic podcast featuring CEOs, business leaders, and decision-makers. It explores markets, investment opportunities, and Saudi Arabia’s economic transformation under Vision 2030.",
     },
 
     cadence: {
@@ -138,9 +138,9 @@ export const channels = [
     },
 
     description: {
-      ar: "برنامج من إنتاج أرقام تقدّمه مريم، انطلق في مايو 2026، ويبسّط المفاهيم المالية والاستثمارية ويشرح المصطلحات الأساسية بطريقة واضحة ومباشرة، لمساعدتك على فهم عالم الاستثمار والأسواق المالية. يمكن مشاهدة الحلقات المنشورة أدناه.",
+      ar: "برنامج يبسّط المفاهيم المالية والاستثمارية ويشرح المصطلحات الأساسية بطريقة واضحة ومباشرة، لمساعدتك على فهم عالم الاستثمار والأسواق المالية. يمكن مشاهدة الحلقات المنشورة أدناه.",
 
-      en: "A program produced by Argaam and presented by Maryam, launched in May 2026. It simplifies financial and investment concepts and explains key terms in a clear and straightforward way, helping viewers better understand investing and financial markets. Watch the available episodes below.",
+      en: "A programme that simplifies key financial and investment concepts, explaining essential terms in a clear and straightforward way to help you better understand the world of investing and financial markets.",
     },
 
     cadence: {
@@ -175,9 +175,9 @@ export const channels = [
     },
 
     description: {
-      ar: "برنامج قصير يقف فيه المقدّم أمام الكاميرا بلهجة سعودية عامية ويشرح في كل حلقة فكرة مالية واحدة في حدود دقيقة ونصف إلى دقيقتين. تناولت حلقاته كيف يأكل التضخم قيمة أموالك، والفرق بين الادخار والاستثمار، وأين يمكن للمبتدئ أن يستثمر، وكيف يلخّص رقم واحد صورة السوق كاملة.",
+      ar: "برنامج تعليمي يهدف إلى تبسيط عالم الاستثمار للمبتدئين، من خلال شرح طرق الاستثمار المختلفة، والخيارات والأدوات المتاحة، وتقديم معلومات ونصائح عملية تساعد المشاهد على فهم خطوات الاستثمار وبناء قراراته بشكل أوضح، بأسلوب بسيط ومباشر بعيد عن التعقيد.",
 
-      en: "A short-form personal-finance explainer: one presenter, straight to camera in colloquial Saudi Arabic, unpacking a single money idea in ninety seconds to two minutes. Episodes have covered how inflation erodes your cash, why saving alone is not enough, where a beginner can actually invest, and how one index number captures the whole market.",
+      en: "An educational programme that makes investing easier to understand for beginners. It explores different investment approaches, options, and tools, with practical tips to help viewers better navigate their investment journey.",
     },
 
     cadence: {
@@ -212,9 +212,9 @@ export const channels = [
     },
 
     description: {
-      ar: "سلسلة قصيرة تفتح صناديق الاستثمار السعودية وتُظهر أين تتركّز حيازاتها فعلياً، في مقاطع لا تتجاوز الدقيقة. تناولت حلقتها الأولى تركّز استثمارات الصناديق في قطاع النقل، مروراً بأسماء مثل «البحري» و«طيران ناس» و«بدجت السعودية».",
+      ar: "سلسلة قصيرة ننظر من خلالها داخل صناديق الاستثمار السعودية وأين تتركّز حيازاتها فعليًا، في سلسلة مقاطع لا تتجاوز الدقيقة تتناول قطاع مختلفة في كل حلقة جديدة.",
 
-      en: "A short series that pries open Saudi investment funds and shows where their holdings are actually concentrated, in clips under a minute. The first episode looked at fund exposure to the transport sector, walking through names such as Bahri, Flynas and Budget Saudi.",
+      en: "A short-form series that takes a closer look inside Saudi investment funds and where their holdings are actually concentrated. Each episode, lasting no more than one minute, focuses on a different sector.",
     },
 
     cadence: {
@@ -247,9 +247,9 @@ export const channels = [
     },
 
     description: {
-      ar: "برنامج قادم من أرقام يتناول نتائج الشركات المدرجة، يقدّمه عبدالرحمن النفيعي. لم تُنشر حلقاته بعد.",
+      ar: "سلسلة مرئية قادمة تحوّل نتائج الشركات المدرجة إلى مقاطع قصيرة وواضحة، مدعومة بالأرقام والبيانات، تستعرض أبرز النتائج والمؤشرات المالية، وتسلّط الضوء على ما تعنيه هذه الأرقام لأداء الشركة.",
 
-      en: "An upcoming Argaam programme on listed-company results, presented by Abdulrahman Al-Nufaie. No episodes have been published yet.",
+      en: "An upcoming video series that turns listed companies’ results into short, clear, data-driven videos, highlighting key results and financial indicators while exploring what the numbers mean for each company’s performance.",
     },
 
     cadence: {

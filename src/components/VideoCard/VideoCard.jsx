@@ -9,7 +9,9 @@ const VideoCard = ({ videoData }) => {
   const [imageQuality, setImageQuality] = useState("maxresdefault");
   // get channel data depend on channelId to set color and channel name
   const channel = getChannelByChannelId(videoData?.channelId);
-  const lang = useLang("en", "ar")
+  const lang = useLang("en", "ar");
+  console.log(channel);
+  
   return (
     <Link to={`/${useLang("en", "ar")}/watch/${videoData?.id}`} className="text-decoration-none h-100 d-block" data-color={channel?.key}>
       <div className="card video-channel-card video-card custom-fs-12 text-capitalize rounded-0 cursor-pointer h-100">
@@ -44,7 +46,7 @@ const VideoCard = ({ videoData }) => {
         </div>
         {/* video card content */}
         <div className="card-body d-flex flex-column gap-2">
-          <p className="card-text channel-title theme_text_secondary">{useLang(channel?.name?.en, channel?.name?.ar)}</p>
+          <p className="card-text channel-title theme_text_secondary mb-1">{useLang(channel?.name?.en, channel?.name?.ar)}</p>
           <h5 className="card-title custom-fs-16 theme_text_main m-0">{useLang(videoData?.title?.en, videoData?.title?.ar)}</h5>
           <div className='d-flex justify-content-start align-items-center gap-1 theme_text_secondary'>
             <p className="card-text m-0">{useLang("episode", "الحلقه")} {videoData?.number}</p>

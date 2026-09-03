@@ -20,8 +20,8 @@ const HomeSliderComp = ({ sectionTitle, linkLabel, link, linkState, data, render
             {/* section swiper videos */}
             <Swiper
                 key={useLang("ltr", "rtl")}
-                slidesPerView={4}
-                slidesPerGroup={4}
+                slidesPerView={5}
+                slidesPerGroup={5}
                 speed={1000}
                 loop={false}
                 navigation={true}
@@ -40,8 +40,8 @@ const HomeSliderComp = ({ sectionTitle, linkLabel, link, linkState, data, render
                         slidesPerGroup: 3
                     },
                     1200: {
-                        slidesPerView: 4,
-                        slidesPerGroup: 4
+                        slidesPerView: 5,
+                        slidesPerGroup: 5
                     },
                 }}
             >

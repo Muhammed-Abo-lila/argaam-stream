@@ -10,6 +10,7 @@ import {
 } from "../../data/selectorFunctions";
 import NotFound from "../NotFound/NotFound";
 import SectionHead from "../../components/SectionHead/SectionHead";
+import { formatDate } from "../../utils/helpers";
 const Channel = () => {
   const { id } = useParams();
   const [activeSort, setActiveSort] = useState("newest");
@@ -58,7 +59,7 @@ const Channel = () => {
           <img src={channelDetails?.cover} alt="card img" />
         </div>
         <div className="channel-overlay"></div>
-        <div className="container-fluid">
+        <div className="container">
           <div className="channel-details mb-5">
             <span
               data-color={channelDetails?.key}
@@ -70,7 +71,7 @@ const Channel = () => {
                 backgroundColor: "var(--channel_color)",
               }}
             ></span>
-            <h3 className="text-white custom-fs-24-30">
+            <h3 className="text-white custom-fs-24 fw-bold mb-2">
               {useLang(channelDetails?.name?.en, channelDetails?.name?.ar)}
             </h3>
             <p>
@@ -94,7 +95,9 @@ const Channel = () => {
               <span>.</span>
               <span>
                 {useLang("Launched", "انطلق")}{" "}
-                <span className="ag-num">{channelDetails?.launchedAt}</span>
+                <span className="ag-num" dir="ltr">
+                  {formatDate(channelDetails?.launchedAt)}
+                </span>
               </span>
               <span>.</span>
               <span>
@@ -127,7 +130,7 @@ const Channel = () => {
         </div>
       </div>
 
-      <div className="container-fluid my-5">
+      <div className="container my-5">
         {/*section header */}
         <SectionHead sectionTitle={useLang("all episodes", " كل الحلقات")}>
           {/* videos sort */}

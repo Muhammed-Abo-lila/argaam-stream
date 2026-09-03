@@ -85,7 +85,7 @@ body {
   margin: 0;
 }
 
-.container-fluid {
+.container {
   max-width: 1600px !important;
 }
 
@@ -329,7 +329,7 @@ body {
   }
 
   /* Content */
-  .channel-heroSection .container-fluid {
+  .channel-heroSection .container {
     width: 100%;
     padding-inline: 16px;
   }

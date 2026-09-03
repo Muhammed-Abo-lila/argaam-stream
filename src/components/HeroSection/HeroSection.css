@@ -43,16 +43,15 @@
 }
 
 .heroSection .heroSection-info-wrapper .heroSection-info-title {
-    font-size: 28px;
-    line-height: 1.25;
+    line-height: 1.3;
     color: #f6f3ec;
     -webkit-line-clamp: 2;
 }
 
 .heroSection .heroSection-info-wrapper .heroSection-info-synopsis {
-    line-height: 1.65;
+    line-height: 1.75;
     color: #f6f3ecdb;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     overflow: hidden;

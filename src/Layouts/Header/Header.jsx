@@ -89,7 +89,7 @@ const Header = () => {
 
   return (
     <header className="navbar theme_bg_main py-3">
-      <div className="container-fluid">
+      <div className="container">
         <div className="row w-100 m-auto row-gap-3">
           {/* logo */}
           <div className="col-sm-12 col-md-6 col-lg-3 col-xxl-2">
@@ -127,7 +127,7 @@ const Header = () => {
           <div className="col-sm-12 col-md-6 col-lg-4 col-xxl-4">
             <div className="right-nav d-flex align-items-center justify-content-end gap-2">
               <div className="search position-relative">
-                <span className="search-icon position-absolute theme_text_secondary d-flex top-50 translate-middle-y ps-2">
+                <span className="search-icon position-absolute theme_text_secondary d-flex top-50 translate-middle-y px-2">
                   <svg
                     width="16"
                     height="16"
@@ -181,10 +181,10 @@ const Header = () => {
                         >
                           <img src={channel.cover} alt={channel.name[lang]} />
                           <div className="d-flex flex-column justify-content-between">
-                            <h3 className="mb-2 custom-fs-14 theme_text_main">
+                            <h3 className="mb-2 custom-fs-12 fw-bold theme_text_main">
                               {channel.name[lang].slice(0, 25)}
                             </h3>
-                            <p className="mb-0 custom-fs-12 theme_text_secondary">
+                            <p className="mb-0 custom-fs-12 fw-regular theme_text_secondary">
                               {channel.description[lang].slice(0, 25)}
                             </p>
                           </div>
@@ -204,10 +204,10 @@ const Header = () => {
                             alt={episode.title[lang]}
                           />
                           <div className="d-flex flex-column justify-content-between">
-                            <h3 className="mb-2 custom-fs-14 theme_text_main">
+                            <h3 className="mb-2 custom-fs-12 fw-bold theme_text_main">
                               {episode.title[lang].slice(0, 25)}
                             </h3>
-                            <p className="mb-0 custom-fs-12 theme_text_secondary">
+                            <p className="mb-0 custom-fs-12 fw-regular theme_text_secondary">
                               {episode.synopsis[lang].slice(0, 25)}
                             </p>
                           </div>
@@ -218,7 +218,7 @@ const Header = () => {
                       searchResults.episodes.length > 0) && (
                       <div className="search-dropdown-actions text-center">
                         <Link
-                          className="d-block theme_text_identity custom-fs-18 fw-bold mt-1 mb-2"
+                          className="d-block theme_text_identity custom-fs-14 fw-bold mt-3 mb-3"
                           to={`/${lang}/search?q=${encodeURIComponent(searchTerm.trim())}`}
                           onClick={() => setSearchTerm("")}
                         >

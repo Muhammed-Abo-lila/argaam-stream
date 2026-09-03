@@ -45,7 +45,7 @@ const Search = () => {
   }, [searchTerm]);
 
   return (
-    <div className="container-fluid theme_text_main py-5">
+    <div className="container theme_text_main py-5">
       <PagesHeader pageTitle={useLang("search results", "نتائج البحث")} />
       {searchResults.channels.length > 0 ||
         searchResults.episodes.length > 0 ? (

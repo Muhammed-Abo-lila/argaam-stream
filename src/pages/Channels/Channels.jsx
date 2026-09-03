@@ -6,7 +6,7 @@ import SectionHead from "../../components/SectionHead/SectionHead";
 import PagesHeader from "../../components/PagesHeader/PagesHeader";
 const Channels = () => {
   return (
-    <div className="container-fluid my-5 channels">
+    <div className="container my-5 channels">
       <PagesHeader
         pageTitle={useLang("channels", "البرامج")}
         pageSubtitle={useLang(

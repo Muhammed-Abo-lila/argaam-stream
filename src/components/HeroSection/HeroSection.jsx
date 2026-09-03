@@ -48,7 +48,7 @@ const HeroSection = () => {
 
   return (
     <section className="heroSection w-100 position-relative d-flex align-items-end">
-      <div className="container-fluid">
+      <div className="container">
         <div className="img-wrapper">
           <img
             className="w-100 h-100 object-fit-cover"
@@ -61,8 +61,8 @@ const HeroSection = () => {
         <div className="heroSection-overlay"></div>
         {/* hero section info */}
         <div className="heroSection-info-wrapper">
-          <div className="heroSection-info">
-            <div className="heroSection-info-kicker d-flex align-items-center gap-2">
+          <div className="heroSection-info my-4">
+            {/* <div className="heroSection-info-kicker d-flex align-items-center gap-2">
               <span className="badge badge--onDark custom-fs-12">
                 {useLang("Featured episode", "حلقة مميزة")}
               </span>
@@ -73,22 +73,22 @@ const HeroSection = () => {
               >
                 {useLang("Argaam OnPoint", "أرقام أون بوينت")}
               </Link>
-            </div>
+            </div> */}
 
-            <h2 className="heroSection-info-title my-3 fw-bold">
+            <h2 className="heroSection-info-title mb-4 fw-bold">
               {useLang(
                 sortedPublishedEpisode?.title?.en,
                 sortedPublishedEpisode?.title?.ar,
               )}
             </h2>
 
-            <p className="heroSection-info-synopsis custom-fs-14 ">
+            <p className="heroSection-info-synopsis custom-fs-18 ">
               {useLang(
                 sortedPublishedEpisode?.synopsis?.en,
                 sortedPublishedEpisode?.synopsis?.ar,
               )}
             </p>
-            <div className="heroSection-info-meta footer_secondary_color d-flex flex-wrap align-items-center gap-2 mt-3 custom-fs-14">
+            {/* <div className="heroSection-info-meta footer_secondary_color d-flex flex-wrap align-items-center gap-2 mt-3 custom-fs-14">
               <span>
                 {useLang("Episode", "الحلقة")}{" "}
                 <span>{sortedPublishedEpisode?.number}</span>
@@ -107,8 +107,8 @@ const HeroSection = () => {
                 <span>{formatViews(sortedPublishedEpisode?.views)}</span>{" "}
                 {useLang("views", "مشاهدة")}
               </span>
-            </div>
-            <div className="heroSection-info-actions d-flex flex-wrap align-items-center gap-2 mt-3">
+            </div> */}
+            {/* <div className="heroSection-info-actions d-flex flex-wrap align-items-center gap-2 mt-3">
               <Link
                 className="btn btn--primary"
                 to={`/${useLang("en", "ar")}/watch/${sortedPublishedEpisode?.id}`}
@@ -183,7 +183,7 @@ const HeroSection = () => {
                 </svg>
                 {useLang("About this channel", "عن القناة")}
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

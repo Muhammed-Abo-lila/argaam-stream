@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className=" custom-fs-14">
             <div className="top-footer" style={{ backgroundColor: "#262220" }}>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row py-5 row-gap-4" >
 
                         <div className="col-6 col-md-4">
@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
 
             <div className="bottom-footer" style={{ backgroundColor: "#000" }}>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="d-flex flex-column justify-content-center align-items-center row-gap-3 flex-sm-row justify-content-sm-between w-full footer_secondary_color text-capitalize py-3 custom-fs-12">
                         <p className="m-0">{useLang("all rights reserved, argaam investment company.", "جميع الحقوق محفوظة لشركة أرقام الإستثمارية.")}</p>
                         <p className="m-0">{useLang("content is informational and is not investment advice.", "المحتوى المعروض لأغراض إعلامية ولا يُعد توصية استثمارية.")}</p>

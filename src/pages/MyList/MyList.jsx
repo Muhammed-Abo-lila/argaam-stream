@@ -16,7 +16,7 @@ const MyList = () => {
     myListIds.includes(episode.id),
   );
   return (
-    <div className="container-fluid my-5 browse-all">
+    <div className="container my-5 browse-all">
       {/* page header */}
       <PagesHeader
         pageTitle={useLang("my list", "قائمتي")}
