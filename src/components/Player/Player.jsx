@@ -68,7 +68,7 @@ export default function Player({
         <YouTube
             videoId={videoId}
             title={title}
-            iframeClassName="video-iframe"
+            iframeClassName="w-100 h-100 d-block"
             opts={{
                 playerVars: {
                     autoplay: 1,
